@@ -1,0 +1,9 @@
+# Claude Code local settings (machine-specific)
+.claude/settings.local.json
+
+# Impeccable engine binary (re-downloaded and checksum-verified by its launcher)
+.claude/skills/impeccable/scripts/bin/
+
+node_modules/
+.vercel/
+.DS_Store
