@@ -37,9 +37,9 @@ This folder is **reference material for the rebuild**. It is not the site itself
 | Sister Support | `/sister-support/` | |
 | Events | `/events/` | |
 | Ovarian Fitness Orlando | `/ovarian-fitness-orlando/` | Links out to the OCRA Fit Orlando signup/donate pages. |
-| Get Involved | `/get-involved/` | Has an Elementor form (name and email). It needs a replacement form backend. |
+| Get Involved | `/get-involved/` | **This is the de facto contact page.** It has an Elementor "Intake Form" with 11 fields: first and last name, email, phone, city/state, "I am a...", cancer type, hopes, how they heard about us, joining the monthly meetup, and anything else. The full list is in `content/text/get-involved.md`. It needs a replacement form backend. |
 | In The News | `/press-news/` | Links to a WESH article. |
-| Contact Us | `/contact-us/` | **Empty on the live site.** |
+| Contact Us | `/contact-us/` | Empty leftover page. Get Involved serves as the contact page. |
 | Privacy Policy | `/privacy-policy/` | **Empty on the live site.** |
 | Terms of Use | `/terms-of-use/` | **Empty on the live site.** |
 
