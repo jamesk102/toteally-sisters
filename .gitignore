@@ -10,3 +10,6 @@ node_modules/
 
 # Playwright CLI session logs and snapshots
 .playwright-cli/
+
+# Impeccable per-developer overrides
+.impeccable/config.local.json
