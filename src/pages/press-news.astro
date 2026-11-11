@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import Arrow from '../components/Arrow.astro';
+---
+<Base title="In The News">
+  <section class="intro">
+    <div class="intro-inner center" data-fade>
+      <h1 class="h-xl news-title">In The News</h1>
+      <p class="text-lg">We’re proud to be part of the conversation around ovarian and gynecologic cancers—and even prouder when that conversation reaches a wider audience.</p>
+    </div>
+  </section>
+
+  <section class="section story">
+    <div class="story-inner center">
+      <div class="video" data-fade>
+        <video controls preload="metadata" poster="/media/ovarian-cancer-awareness-poster.jpg" width="1280" height="720" playsinline>
+          <source src="/media/ovarian-cancer-awareness.mp4" type="video/mp4" />
+          <a href="https://www.wesh.com/article/ovarian-cancer-awareness/44975144">Watch the segment on WESH.com</a>
+        </video>
+      </div>
+      <div data-fade>
+        <h2 class="h-xl cap">Ovarian Cancer Awareness Month</h2>
+        <div class="text-lg body">
+          <p>WESH 2 highlighted the important work of the Ovarian Cancer Research Alliance (OCRA) in raising awareness and promoting upcoming events throughout September. With nearly 20,000 women expected to be diagnosed with ovarian cancer this year, early detection remains critical—yet only 17% of cases are caught in Stage 1.</p>
+          <p>OCRA’s efforts include community education, symptom awareness (using the acronym <em>BEACH</em>), and fitness-based fundraising events like <strong>Ovarian Cycle Orlando</strong>. <em>Toteally Sisters</em> proudly supports these life-saving initiatives and will be participating in local events all month long.</p>
+        </div>
+        <a class="btn" href="https://www.wesh.com/article/ovarian-cancer-awareness/44975144" rel="noopener">Read the Article <Arrow /></a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .intro { background: rgb(235 186 217 / 0.24); padding: 80px 40px 120px; }
+  .intro-inner { max-width: 700px; margin-inline: auto; display: grid; gap: 20px; }
+  .news-title { font-size: 90px; line-height: 90px; }
+  .story { padding-block: 120px 140px; }
+  .story-inner { max-width: 1024px; margin-inline: auto; display: grid; gap: 60px; }
+  .video { border: 8px solid var(--pink); border-radius: 30px; overflow: hidden; background: #000; }
+  .video video { width: 100%; height: auto; aspect-ratio: 16 / 9; }
+  .body { margin-block: 20px 40px; }
+  @media (max-width: 1024px) { .news-title { font-size: 70px; line-height: 80px; } }
+  @media (max-width: 767px) {
+    .intro { padding: 40px 30px; }
+    .story { padding-block: 40px; }
+    .news-title { font-size: 50px; line-height: 50px; }
+    .story-inner { gap: 40px; }
+    .video { border-radius: 20px; }
+    .body { margin-block: 15px 30px; }
+  }
+</style>

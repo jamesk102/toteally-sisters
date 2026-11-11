@@ -1,0 +1,13 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site } from '../../data/site';
+---
+<Base title="Message not sent">
+  <section class="section" style="background: rgb(235 186 217 / 0.34)">
+    <div class="center" style="max-width: 750px; margin-inline: auto; display: grid; gap: 15px; justify-items: center;">
+      <h1 class="h-xl">Sorry, your message didn’t send.</h1>
+      <p class="text-lg">Please check that your first name, last name and email are filled in and try again, or message us on <a href={site.instagram} rel="noopener">Instagram</a>.</p>
+      <a class="btn" href="/get-involved/" style="margin-top: 20px;">Back to the Form</a>
+    </div>
+  </section>
+</Base>

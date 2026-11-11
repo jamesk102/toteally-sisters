@@ -1,0 +1,150 @@
+---
+import Base from '../layouts/Base.astro';
+import Slideshow from '../components/Slideshow.astro';
+import IconCard from '../components/IconCard.astro';
+import spin from '../icons/spin.svg?raw';
+import dance from '../icons/dance.svg?raw';
+import yoga from '../icons/yoga.svg?raw';
+import lunch from '../icons/lunch.svg?raw';
+import healthy from '../icons/healthy.svg?raw';
+import { site } from '../data/site';
+---
+<Base title="Ovarian Fitness Orlando">
+  <section class="banner on-dark">
+    <img src="/images/ocoHero1-scaled.jpg" width="2560" height="1707" alt="" fetchpriority="high" decoding="async" />
+    <h1 class="h-xl" data-fade>Ovarian Fitness Orlando</h1>
+  </section>
+
+  <section class="section intro ribbons">
+    <div class="wrap">
+      <div class="intro-grid">
+        <h2 class="h-xl" data-fade>Get Fit, Fundraise, and Make a Difference!</h2>
+        <div class="intro-copy" data-fade style="--fade-delay:120ms">
+          <p class="text-lg">Welcome to Ovarian Fitness Orlando, a unique fitness fundraiser dedicated to supporting ovarian cancer research. Join us on <strong>September 26, 2026</strong>, for an inspiring day of movement and community.</p>
+          <div class="buttons">
+            <a class="btn" href={site.ocraSignup} rel="noopener">Register</a>
+            <a class="btn btn--white" href={site.ocraDonate} rel="noopener">Donate</a>
+          </div>
+        </div>
+      </div>
+      <div data-fade>
+        <Slideshow class="wide-show" slides={[
+          { src: '/images/hero3.jpg', alt: 'Two women at a vendor table at Ovarian Fitness Orlando.' },
+          { src: '/images/hero2.jpg', alt: 'Participants gathered at Ovarian Fitness Orlando.' },
+        ]} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section join">
+    <div class="wrap two-col">
+      <div class="col-copy" data-fade>
+        <h2 class="h-xl cap">Join Us For A Fitness Fundraising Event!</h2>
+        <p class="text-lg">Participate in energizing fitness classes while supporting a vital cause. Your involvement helps fund research and support for those affected by ovarian cancer.</p>
+        <div class="buttons">
+          <a class="btn" href={site.ocraSignup} rel="noopener">Register</a>
+          <a class="btn btn--white" href={site.ocraHome} rel="noopener">Learn More</a>
+        </div>
+      </div>
+      <img class="join-img" src="/images/ovarianFitnessEvent.png" width="1250" height="1000" loading="lazy" decoding="async" alt="Six women in black Ovarian Cancer Research Alliance tank tops flexing and laughing outside the studio." data-fade style="--fade-delay:120ms" />
+    </div>
+  </section>
+
+  <section class="section classes on-dark">
+    <div class="wrap">
+      <div class="classes-head center" data-fade>
+        <span class="pill">Classes</span>
+        <h2 class="classes-heading">Explore Our Exciting<br /> Fitness Class Options</h2>
+        <p class="text-lg">Join us for a variety of invigorating fitness classes designed for all levels. Choose from spin, dance fitness, or yoga to get your heart pumping while supporting a great cause.</p>
+      </div>
+      <div class="cards">
+        <IconCard icon={spin} title="Spin Classes: Energize Your Workout Experience">Our spin classes are perfect for those looking to boost their endurance and strength.</IconCard>
+        <IconCard icon={dance} title="Dance Fitness: Get Moving and Grooving" delay={100}>Join our dance fitness class for a fun, high-energy workout that will lift your spirits.</IconCard>
+        <IconCard icon={yoga} title="Yoga: Find Your Inner Peace and Strength" delay={200}>Our yoga sessions will help you relax and rejuvenate while connecting with your body.</IconCard>
+      </div>
+    </div>
+  </section>
+
+  <section class="section lunch">
+    <div class="wrap two-col lunch-grid">
+      <img class="frame lunch-img" src="/images/islandFinPoke.jpeg" width="2560" height="2048" loading="lazy" decoding="async" alt="Poke bowls on a wooden board branded Island Fin Poke." data-fade />
+      <div class="col-copy" data-fade style="--fade-delay:120ms">
+        <h2 class="h-xl cap">Enjoy Delicious Lunch At Our Event</h2>
+        <p class="text-lg">Savor a delightful meal provided by Island Fin Poke, Lake Nona. Fuel your body and spirit as you participate in our fitness classes.</p>
+        <div class="boxes">
+          <div class="box"><span class="box-icon" aria-hidden="true" set:html={lunch} /><h3 class="h-sm">Lunch Break</h3><p>Enjoy fresh, healthy options to keep you energized throughout the day.</p></div>
+          <div class="box"><span class="box-icon" aria-hidden="true" set:html={healthy} /><h3 class="h-sm">Healthy Choices</h3><p>Nourish yourself with quality ingredients that support your fitness journey.</p></div>
+        </div>
+        <div class="buttons">
+          <a class="btn" href={site.ocraSignup} rel="noopener">Register</a>
+          <a class="btn btn--white" href={site.ocraHome} rel="noopener">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .banner { position: relative; height: 540px; overflow: hidden; }
+  .banner img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; }
+  .banner h1 { position: relative; color: #fff; text-align: right; padding: 40px 100px 0; }
+
+  .intro { background-color: rgb(235 186 217 / 0.13); background-position: 0 0; }
+  .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .intro-copy { display: grid; gap: 30px; justify-items: start; }
+  .buttons { display: flex; gap: 30px; flex-wrap: wrap; }
+  :global(.wide-show) { margin-top: 80px; height: 700px; border: 8px solid var(--peach); border-radius: 100px; }
+
+  .join { background: rgb(235 186 217 / 0.26); padding-inline: 70px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .col-copy { display: grid; gap: 20px; justify-items: start; }
+  .col-copy .buttons { margin-top: 20px; }
+  .join-img { width: 100%; max-width: 620px; justify-self: end; aspect-ratio: 620 / 499; object-fit: cover; border: 8px solid #fff; border-radius: 70px; }
+
+  .classes { background: var(--purple); color: #fff; padding-block: 80px 106px; }
+  .classes-head { display: grid; justify-items: center; gap: 25px; max-width: 760px; margin-inline: auto; }
+  .classes-heading { font-family: var(--serif); font-weight: 400; font-size: 85px; line-height: 95px; letter-spacing: -2px; }
+  .cards { margin-top: 60px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; }
+
+  .lunch { padding: 120px 70px; }
+  .lunch-grid { grid-template-columns: 610fr 610fr; gap: 80px; }
+  .lunch-img { width: 100%; aspect-ratio: 610 / 810; }
+  .boxes { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .box { background: rgb(235 186 217 / 0.2); border-radius: 20px; padding: 20px; display: grid; gap: 15px; align-content: start; }
+  .box-icon :global(svg) { width: 40px; height: 40px; }
+  .box p { font-size: 18px; line-height: 27px; }
+
+  @media (max-width: 1024px) {
+    .banner { height: 400px; }
+    .banner h1 { padding: 0 40px 30px; position: absolute; bottom: 0; left: 0; right: 0; text-align: center; }
+    .intro-grid, .two-col, .lunch-grid { grid-template-columns: 1fr; gap: 40px; }
+    .intro > .wrap { display: flex; flex-direction: column-reverse; gap: 60px; }
+    .intro :global(.wide-show) { margin-top: 0; }
+    :global(.wide-show) { height: 480px; margin-top: 60px; }
+    .join, .lunch { padding: 80px 40px; }
+    .join-img { order: -1; justify-self: center; }
+    .cards { grid-template-columns: 1fr; max-width: 560px; margin-inline: auto; gap: 30px; }
+    .classes-heading { font-size: 70px; line-height: 80px; }
+    .lunch-img { max-width: 520px; justify-self: center; }
+  }
+  @media (max-width: 767px) {
+    .banner { height: 464px; }
+    .banner h1 { padding: 0 20px 24px; }
+    .intro { padding-inline: 20px; }
+    .intro-grid { text-align: center; }
+    .intro-copy { justify-items: center; }
+    .buttons { gap: 15px; justify-content: center; }
+    :global(.wide-show) { height: 260px; border-radius: 60px; }
+    .intro > .wrap { gap: 40px; }
+    .join, .lunch { padding: 40px 20px; }
+    .lunch-img { max-width: 300px; }
+    .col-copy { justify-items: center; text-align: center; }
+    .join-img { border-radius: 50px; }
+    .classes { padding: 40px 20px; }
+    .classes-heading { font-size: 40px; line-height: 50px; }
+    .cards { margin-top: 40px; gap: 20px; }
+    .boxes { grid-template-columns: 1fr; gap: 20px; text-align: center; }
+    .box { justify-items: center; }
+    .box p { font-size: 16px; line-height: 24px; }
+  }
+</style>

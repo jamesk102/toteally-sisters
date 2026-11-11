@@ -1,8 +1,8 @@
 /** The Join intake form: one definition shared by the page and the email endpoint. */
 
-export const iAmOptions = ['A survivor', 'Currently in treatment', 'A caregiver or loved one', 'Something else', 'Prefer not to say'];
-export const heardOptions = ['Instagram', 'Facebook', 'An event', 'A flyer', 'A friend', 'OCRA', 'My care team', 'Somewhere else'];
-export const meetupOptions = ['Yes, please', 'Maybe, tell me more', 'Not right now'];
+export const iAmOptions = ['Survivor', 'Currently in treatment', 'Caregiver', 'Other'];
+export const heardOptions = ['Instagram', 'Facebook', 'Event', 'A flyer', 'A friend', 'OCRA', 'Other'];
+export const meetupOptions = ['Yes', 'No', 'Maybe'];
 
 export type JoinFields = {
   firstName: string;
@@ -19,16 +19,16 @@ export type JoinFields = {
 };
 
 export const labels: Record<keyof JoinFields, string> = {
-  firstName: 'First name',
-  lastName: 'Last name',
-  email: 'Email',
-  phone: 'Phone',
-  location: 'City and state',
-  iAm: 'I am…',
-  cancerType: 'Type of cancer',
-  hopes: 'What are you hoping to get from Toteally Sisters?',
+  firstName: 'First Name',
+  lastName: 'Last Name',
+  email: 'Email Address',
+  phone: 'Phone Number',
+  location: 'City & State',
+  iAm: 'I am a...',
+  cancerType: 'Type of Cancer',
+  hopes: 'What are you hoping to get out of joining Toteally Sisters?',
   heard: 'How did you hear about us?',
-  meetup: 'Would you like to join the monthly meetup?',
+  meetup: 'Would you like to join our monthly virtual meetup?',
   more: 'Anything else you’d like to share?',
 };
 

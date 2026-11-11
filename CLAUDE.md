@@ -2,36 +2,29 @@
 
 Rebuilding **toteallysisters.org**, currently on WordPress + Elementor, as a new site in this repo, deployed on **Vercel**. It is a survivor-founded community for women affected by gynecologic cancers.
 
-**Status:** built (Nov 2026). The Astro site is complete, passed Impeccable's finish review (verdict: ship after one fix round), and is waiting on the owner's content items below and on the Vercel connection. The current WordPress site stays live until the owner approves the switch.
+**Status (Nov 2026): a faithful clone of the current site, live at https://toteally-sisters.vercel.app.** Every push to `main` deploys to Vercel. The WordPress site stays live at toteallysisters.org until the owner switches the domain.
+
+> **The owner's direction overrides everything below it:** keep the existing site essentially **verbatim**: same pages, same original URLs, same layout, same copy word for word, same photos at **full original resolution (never downscale or re-encode photos)**. Only subtle improvements: gentle fade-ins on scroll, the new mobile menu, accessibility (alt text, focus, labels) and speed. An earlier redesign ("the community board") was rejected and replaced; don't bring it back. Ask before changing any wording, layout or imagery.
 
 ## Read first
 
 - `PRODUCT.md`: audience, purpose, the OCRA partnership, voice, accessibility, and what not to fabricate. **This is the top authority for every design decision.**
-- `DESIGN.md` (the design system: "The Community Corkboard"; `.impeccable/design.json` is its sidecar) and `.impeccable/surfaces/src-pages-index-astro.md` (the home page direction contract: "the community board").
+- `DESIGN.md`: the clone's visual system (tokens measured from the original site).
 - `_source/README.md`: snapshot of the current site (media, fonts, brand colors, page inventory, links). Page copy is in `_source/content/text/`, and all media is indexed in `_source/media/INDEX.md`.
 
 ## Decisions already made
 
-- **Direction:** keep the feel of the current site and make it better. This is a refinement of the existing identity, not a rebrand. Keep the palette (purple `#673B98`, pink `#EBBAD9`, peach `#FFDCBC`, teal `#0DA7A7`), the Instrument Serif headings and Satoshi body text, the real photos and the warm tone.
-- **Stack:** Astro on Vercel. Events, team members and press items live as content files.
-- **Get Involved is the contact page.** Its 11-field intake form (listed in PRODUCT.md) is the site's main conversion. Submissions are **emailed to a team member**, with no Google Sheet or CRM. The old empty Contact Us page is dropped.
-- **OCRA:** Toteally Sisters is independent and partners with OCRA. All Donate and Register links go to OCRA's Ovarian Fitness Orlando pages. Never imply Toteally Sisters takes donations itself or is part of OCRA.
-
-### Decided after the Impeccable critique (Nov 2026; current site scored 16/36)
-
-The full critique is in `.impeccable/critique/`.
-
-- **The monthly Zoom meetup is the centerpiece.** Sister Support becomes a "Monthly Meetup / What to expect" page: when, how long, cameras optional, caregivers welcome, and answers to first-timer questions. Home and every "Join" button lead there. Say outright that **all gynecologic cancers are welcome**, not only ovarian.
-- **Navigation:** "Join a meetup" (Get Involved) is the main button everywhere, including the phone menu, and opens in the same tab. **Donate becomes a smaller text link labeled "Donate via OCRA (with an out-arrow icon)"** and must never appear twice.
-- **Intake form:** keep all 11 fields, made gentler. No pre-selected answers, add "Prefer not to say", autocomplete attributes, a visible focus ring, plain-language inline errors, a privacy and "what happens next" note above the button, and a warm confirmation after sending.
-- **Scope: fix everything** the critique found while rebuilding, keeping the same look. Copy changes outside Our Story go to the owner for approval.
-- **Events:** past events go into an automatic "Past events" section. Show a friendly empty state when nothing is scheduled. Home features the next upcoming event, falling back to the meetup.
-- **Accessibility baseline:** one H1 per page, real alt text, labeled icon controls, a focus outline visible on dark and light backgrounds, and no white text on `#0DA7A7`.
+- **Faithful clone** (see the owner's direction above). Pages and URLs match WordPress: `/`, `/our-story/`, `/sister-support/`, `/events/`, `/ovarian-fitness-orlando/`, `/get-involved/`, `/press-news/`, `/privacy-policy/`, `/terms-of-use/`. `/contact-us/` forwards to Get Involved, and the redesign's short-lived URLs (`/join`, `/monthly-meetup`, `/in-the-news`, `/privacy`, `/terms`, `/events/ovarian-fitness-orlando`) forward to the originals.
+- **Owner-approved deviations from verbatim:** the Get Involved form keeps the same 11 fields and wording, but its three dropdowns start on "Choose one" (no pre-filled answers) and the Last Name placeholder says "Enter your last name". Privacy Policy and Terms of Use use Claude's plain-language drafts (blank on the original). On the Events page, an event moves to "Past Events" automatically once its date passes (the home page's Ovarian Fitness Orlando section always shows, as on the original).
+- **Other subtle fixes:** the Jeni's event card links to its own Instagram post (the original's image and title linked to the OFO page by mistake); the "Fueling Hope" heading comes before its text on phones; Get Involved opens in the same tab.
+- **OCRA:** Toteally Sisters is independent and partners with OCRA. Donate links go to OCRA's Ovarian Fitness Orlando pages.
+- **Stack:** Astro on Vercel. Form submissions are emailed via Resend.
 
 ## Design skills: priority when they conflict
 
 Installed in `.claude/skills/`. When guidance conflicts, follow this order:
 
+0. **The owner's verbatim-clone direction (top of this file) beats every skill.** Skills apply only to the subtle-improvement layer (motion polish, accessibility, performance), never to restyling or rewriting.
 1. **PRODUCT.md:** audience first, real content only, gentle tone, WCAG 2.2 AA.
 2. **Impeccable** (`/impeccable`): overall design direction, typography, color, layout, critique, audit and polish.
 3. **Emil Kowalski skills** (`emil-design-eng`, `animate`, `choreograph`, `review-animations`, `mobile-native`, `break-ui`, …): motion and interaction craft.
@@ -54,28 +47,27 @@ Installed in `.claude/skills/`. When guidance conflicts, follow this order:
 ## How the site works
 
 - `npm run dev` (port 4321), `npm run build`, `npx astro check`. Node 22.23+.
-- **Site facts** live in `src/data/site.ts`: social links, OCRA links, and the **meetup schedule** (`meetup.schedule`, `time`, `length`, `next`). While those are null, pages say the date and link are emailed after joining.
-- **Events** are Markdown files in `src/content/events/`. Each has `start`/`end`, place, summary, image and alt text. Past events move to "Past events" automatically (at build time, and re-checked in the browser). `hasPage: true` gives an event its own page at `/events/<file-name>`.
-- **Join form** (`src/pages/join/index.astro`, fields in `src/lib/join-form.ts`) posts to `src/pages/api/join.ts`, which emails the team via **Resend**. Vercel environment variables: `RESEND_API_KEY` (secret), `JOIN_TO_EMAIL` (recipient(s), comma-separated), `JOIN_FROM_EMAIL` (sender on a domain verified in Resend). Without them, the form shows a friendly "didn't send" message that points to Instagram. Spam protection: honeypot field plus a minimum time on page.
-- Old WordPress URLs redirect (`astro.config.mjs`).
-- Photos live in `src/assets/photos/` and are optimized by Astro. Each one has its origin embedded (`impeccable embed-prompt --scan src/assets public/media` should report 0 missing). Copy new photos from `_source/media/` and embed their origin.
+- **Pages** are in `src/pages/`, one file per original page, with the original copy written directly in them. Shared styles and the original type sizes and colors are in `src/styles/global.css`. Header, footer, slideshow, icon cards and event cards are in `src/components/`.
+- **Photos** are the original full-resolution files in `public/images/`, served as-is (no resizing). Line icons copied from the original are in `src/icons/`.
+- **Slideshows** (home hero, home OFO, OFO page) crossfade every 5 seconds, pause when off screen, and show only the first photo under reduced motion.
+- **Fade-ins:** add `data-fade` (and optional `style="--fade-delay:120ms"`) to any block. Content stays visible without JavaScript or with reduced motion.
+- **Events** are Markdown files in `src/content/events/` (title, start/end, the card's date label exactly as written, summary, image path, link, `hidden`).
+- **Get Involved form** posts to `src/pages/api/join.ts`, which emails the team via **Resend**. Vercel environment variables: `RESEND_API_KEY` (secret), `JOIN_TO_EMAIL`, `JOIN_FROM_EMAIL` (a sender on a domain verified in Resend). Without them, the form shows a "didn't send" message pointing to Instagram.
+- The news video is the original at full 1280×720, re-encoded for streaming (`public/media/`).
 
 ## Open items before launch
 
 - [ ] Upcoming events. Every event on the current site has passed (as of Nov 2026).
-- [ ] Monthly meetup details: usual day, time, length, platform link policy, and who hosts.
 - [ ] Email address that receives Get Involved submissions.
 - [ ] **Owner review of the drafted Privacy and Terms pages** (`src/pages/privacy.astro`, `terms.astro`). They're written in plain language but aren't legal advice.
-- [ ] Owner approval of the new copy outside Our Story (home sections, Monthly Meetup FAQs, Events, Join).
-- [ ] Founders' personal social links were dropped. Confirm that's intended.
 - [ ] Resend account, a verified sending domain, and the Vercel env vars above.
 - [x] Alt text written for every content image.
-- [x] Awareness video compressed to 12 MB (`public/media/wesh-ovarian-awareness.mp4`).
+- [x] News video kept at full 1280×720 (`public/media/ovarian-cancer-awareness.mp4`).
 - [x] `main` branch created for Vercel production. Optional: make `main` the default branch in GitHub (Settings → General → Default branch).
 
 ## Next steps
 
-Owner connects Vercel to `main`, then preview, then fill in the open items above, then point the domain at Vercel.
+Set up Resend so the form emails the team, review the Privacy and Terms drafts, then point toteallysisters.org at Vercel.
 
 ## Conventions
 

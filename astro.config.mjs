@@ -7,14 +7,17 @@ export default defineConfig({
   adapter: vercel(),
   trailingSlash: 'ignore',
   devToolbar: { enabled: false },
-  // Old WordPress URLs keep working.
+  // The site keeps the original WordPress addresses. These forward the redesign's
+  // short-lived addresses (and the old empty Contact Us page) to the originals.
   redirects: {
-    '/sister-support': '/monthly-meetup',
-    '/get-involved': '/join',
-    '/contact-us': '/join',
-    '/press-news': '/in-the-news',
-    '/ovarian-fitness-orlando': '/events/ovarian-fitness-orlando',
-    '/privacy-policy': '/privacy',
-    '/terms-of-use': '/terms',
+    '/contact-us': '/get-involved/',
+    '/join': '/get-involved/',
+    '/join/thanks': '/get-involved/thanks/',
+    '/join/sorry': '/get-involved/sorry/',
+    '/monthly-meetup': '/sister-support/',
+    '/in-the-news': '/press-news/',
+    '/events/ovarian-fitness-orlando': '/ovarian-fitness-orlando/',
+    '/privacy': '/privacy-policy/',
+    '/terms': '/terms-of-use/',
   },
 });

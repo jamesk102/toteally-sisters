@@ -1,0 +1,33 @@
+---
+import Arrow from './Arrow.astro';
+import { endOf, type Event } from '../lib/events';
+interface Props { event: Event; delay?: number }
+const { event: e, delay = 0 } = Astro.props;
+const external = e.data.link.startsWith('http');
+const rel = external ? 'noopener' : undefined;
+---
+<li class="event-card" data-event-end={endOf(e)} data-fade style={`--fade-delay:${delay}ms`}>
+  <a class="media" href={e.data.link} rel={rel} tabindex="-1" aria-hidden="true">
+    <img src={e.data.image} alt="" loading="lazy" decoding="async" />
+  </a>
+  <p class="date">{e.data.dateLabel}</p>
+  <h3 class="title"><a href={e.data.link} rel={rel}>{e.data.title}</a></h3>
+  <p class="summary">{e.data.summary}</p>
+  <a class="view" href={e.data.link} rel={rel}>View Event <Arrow /><span class="visually-hidden">: {e.data.title}</span></a>
+</li>
+
+<style>
+  .event-card { background: #fff; border-radius: 30px; padding: 30px; display: flex; flex-direction: column; align-items: flex-start; }
+  .media { display: block; width: 100%; aspect-ratio: 367 / 350; border-radius: 20px; overflow: hidden; }
+  .media img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms var(--ease); }
+  .event-card:hover .media img { transform: scale(1.03); }
+  .date { margin-top: 30px; background: #f2f2f2; border-radius: 100px; padding: 8px 12px; font-size: 14px; line-height: 14px; letter-spacing: 1.4px; text-transform: uppercase; }
+  .title { margin-top: 15px; font-family: var(--serif); font-weight: 400; font-size: 40px; line-height: 45px; letter-spacing: -1px; }
+  .title a { text-decoration: none; }
+  .title a:hover { color: var(--purple); }
+  .summary { margin-top: 15px; font-size: 20px; line-height: 30px; flex: 1; }
+  .view { margin-top: 30px; display: inline-flex; align-items: center; gap: 8px; color: var(--purple); font-size: 16px; line-height: 24px; text-decoration: none; }
+  .view:hover { text-decoration: underline; text-underline-offset: 4px; }
+  @media (max-width: 1024px) { .title { font-size: 34px; } .summary { font-size: 18px; line-height: 27px; } }
+  @media (max-width: 767px) { .event-card { padding: 20px; } .date { font-size: 13px; } .title { font-size: 30px; line-height: 30px; } .summary { font-size: 16px; line-height: 24px; } }
+</style>

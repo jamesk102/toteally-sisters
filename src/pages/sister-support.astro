@@ -1,0 +1,93 @@
+---
+import Base from '../layouts/Base.astro';
+import star from '../icons/star.svg?raw';
+---
+<Base title="Sister Support">
+  <section class="intro">
+    <div class="intro-inner center" data-fade>
+      <h1 class="h-xl">Together We Thrive</h1>
+      <p class="text-lg">Uniting women affected by gynecologic cancers through support, education, and community engagement.</p>
+      <div class="buttons">
+        <a class="btn" href="#our-journey">Learn More</a>
+        <a class="btn btn--white" href="/get-involved/">Join Us</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section journey" id="our-journey">
+    <div class="wrap journey-grid">
+      <div class="journey-text" data-fade>
+        <h2 class="h-xl cap">Our Journey: Empowering Women Together</h2>
+        <div class="text-lg">
+          <p>Toteally Sisters was founded by a group of passionate survivors who recognized the need for a supportive community for women facing gynecological cancers.</p>
+          <p>Our mission is to provide education, connection, and empowerment through shared experiences and resources.</p>
+        </div>
+      </div>
+      <img class="frame journey-img" src="/images/our-journey.jpg" width="1440" height="1794" loading="eager" decoding="async" alt="Five Toteally Sisters in Heroes shirts and teal tutus smiling under teal and white balloons." data-fade style="--fade-delay:120ms" />
+    </div>
+  </section>
+
+  <section class="section values on-dark">
+    <div class="wrap values-grid">
+      <div class="values-head" data-fade>
+        <span class="pill pill--white">Empower</span>
+        <h2 class="h-xl">Our Core Values and Guiding Principles</h2>
+      </div>
+      <div class="values-body">
+        <p class="text-lg" data-fade>At Toteally Sisters, we believe in the power of community and support. Our mission is to uplift and empower women facing gynecological cancers through shared experiences and resources.</p>
+        <img class="values-img" src="/images/toteally-sisters-fountain.webp" width="1800" height="1200" loading="lazy" decoding="async" alt="Three women raising their arms in celebration by the fountain at Lake Eola." data-fade />
+        <div class="values-boxes">
+          <div class="value" data-fade>
+            <span class="star" aria-hidden="true" set:html={star} />
+            <h3 class="h-sm">Compassionate Support</h3>
+            <p>We provide a safe space for healing and connection among survivors and fighters.</p>
+          </div>
+          <div class="value" data-fade style="--fade-delay:100ms">
+            <span class="star" aria-hidden="true" set:html={star} />
+            <h3 class="h-sm">Empowerment Through Education</h3>
+            <p>We offer resources and information to help women navigate their cancer journeys.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .intro { background: var(--peach); border-radius: 0 0 50px 50px; padding: 100px 40px; }
+  .intro-inner { max-width: 700px; margin-inline: auto; display: grid; gap: 15px; justify-items: center; }
+  .buttons { margin-top: 25px; display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
+
+  .journey { padding: 120px 70px; }
+  .journey-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .journey-text { display: grid; gap: 20px; }
+  .journey-img { width: 100%; max-width: 620px; aspect-ratio: 620 / 768; justify-self: end; }
+
+  .values { background: var(--teal); color: #fff; padding: 113px 70px; }
+  .values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .values-head { display: grid; gap: 30px; justify-items: start; }
+  .pill--white { background: #fff; color: var(--teal); }
+  .values-body { display: grid; gap: 30px; }
+  .values-img { width: 100%; aspect-ratio: 620 / 413; object-fit: cover; border-radius: 100px; }
+  .values-boxes { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+  .value { display: grid; gap: 15px; align-content: start; }
+  .star :global(svg) { width: 40px; height: 40px; fill: #fff; }
+  .value p { font-size: 18px; line-height: 27px; }
+
+  @media (max-width: 1024px) {
+    .journey, .values { padding: 80px 40px; }
+    .journey-grid, .values-grid { grid-template-columns: 1fr; }
+    .journey-img { justify-self: center; }
+    .values-head { justify-items: center; text-align: center; }
+    .values-body > .text-lg { text-align: center; }
+  }
+  @media (max-width: 767px) {
+    .intro { padding: 40px 30px; }
+    .buttons { gap: 15px; }
+    .journey, .values { padding: 40px 20px; }
+    .journey-grid, .values-grid { gap: 40px; }
+    .values-img { border-radius: 60px; }
+    .values-boxes { grid-template-columns: 1fr; }
+    .value p { font-size: 16px; line-height: 24px; }
+  }
+</style>

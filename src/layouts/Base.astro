@@ -4,14 +4,9 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
 
-interface Props {
-  title: string;
-  description?: string;
-  /** Hide the phone join bar (e.g. on the Join page itself) */
-  hideJoinBar?: boolean;
-}
-const { title, description = site.description, hideJoinBar = false } = Astro.props;
-const fullTitle = title === site.name ? `${site.name}: you don't have to do this alone` : `${title} · ${site.name}`;
+interface Props { title: string; description?: string }
+const { title, description = site.description } = Astro.props;
+const fullTitle = title === site.name ? `${site.name} – A group of women who are gynecological cancer survivors and fighters.` : `${title} – ${site.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 <!doctype html>
@@ -26,10 +21,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    <meta name="theme-color" content="#120c14" />
+    <meta property="og:image" content={new URL('/images/imageHero.jpg', Astro.site)} />
+    <meta name="theme-color" content="#000000" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preload" href="/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/satoshi-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <script is:inline>document.documentElement.classList.add('js')</script>
   </head>
   <body>
     <Header />
@@ -37,37 +34,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       <slot />
     </main>
     <Footer />
-    {!hideJoinBar && (
-      <div class="join-bar on-dark" data-join-bar>
-        <a class="btn" href="/join">Join a meetup</a>
-      </div>
-    )}
     <script>
-      // Phone join bar: appears once the page's own primary button has scrolled out of view.
-      const bar = document.querySelector<HTMLElement>('[data-join-bar]');
-      const anchor = document.querySelector('[data-primary-cta]');
-      if (bar) {
-        if (!anchor) bar.classList.add('show');
-        else {
-          let queued = false;
-          const update = () => { queued = false; bar.classList.toggle('show', anchor.getBoundingClientRect().bottom < 0); };
-          addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
-          update();
-        }
-      }
+      // Gentle fade-in as each block scrolls into view. Blocks already on screen at load fade in right away.
+      const els = document.querySelectorAll<HTMLElement>('[data-fade]');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+        els.forEach((el) => io.observe(el));
+      } else els.forEach((el) => el.classList.add('is-in'));
     </script>
-    <style>
-      main:focus { outline: none; }
-      .join-bar {
-        position: fixed; inset: auto 0 0 0; z-index: 40;
-        padding: 0.75rem var(--gutter) calc(0.75rem + env(safe-area-inset-bottom));
-        background: rgb(18 12 20 / 0.94);
-        transform: translateY(110%);
-        transition: transform 320ms var(--ease-out);
-      }
-      .join-bar.show { transform: none; }
-      .join-bar .btn { width: 100%; }
-      @media (min-width: 1000px) { .join-bar { display: none; } }
-    </style>
+    <style>main:focus { outline: none; }</style>
   </body>
 </html>

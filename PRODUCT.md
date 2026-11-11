@@ -39,7 +39,7 @@ The organization was founded and is led by survivors: Sherry Baird (stage 3C ova
 
 - **Independent organization that partners with OCRA** (Ovarian Cancer Research Alliance). Donations go to OCRA on purpose: Donate and Register link to OCRA's Ovarian Fitness Orlando pages (`orlando.ocrafit.ocrahope.org`). Toteally Sisters does **not** take donations directly. Never imply it does, or that it is part of OCRA.
 - The intake form collects **sensitive health information**. It must be transmitted securely and never stored in client-side analytics or logs. A privacy policy is required before launch.
-- Pages: Home, Our Story, Sister Support, Events, Ovarian Fitness Orlando, Get Involved, In The News, Privacy Policy, Terms of Use. The current Contact Us page is an empty leftover; Get Involved replaces it.
+- Pages (original URLs kept): Home, Our Story, Sister Support, Events, Ovarian Fitness Orlando, Get Involved, In The News, Privacy Policy, Terms of Use. The old empty Contact Us page forwards to Get Involved.
 - **Open:** the form submission recipient email; Privacy Policy and Terms text (both empty on the current site); whether a CMS is needed; whether to compress or externally host the 49 MB awareness video.
 - **Event content is stale:** as of November 2026, every event listed on the current site has passed. Upcoming events need confirming before launch.
 
@@ -47,7 +47,7 @@ The organization was founded and is led by survivors: Sherry Baird (stage 3C ova
 
 - Name: **Toteally Sisters** (a pun on "teal"). Tagline on the current site: "united in teal, stronger together." Site description: "A group of women who are gynecological cancer survivors and fighters."
 - Logo and ribbon mark: `_source/media/2025/04/toteallySistersLogo.svg`, `_source/media/2025/04/toteallyRibbon.svg`.
-- The owner wants the new site to **keep the feel of the current site and make it better**. It is a refinement of the incumbent identity, not a rebrand. The incumbent visual system is recorded in `_source/README.md` and `_source/css/`.
+- **The owner wants the current site cloned essentially verbatim:** same pages, URLs, layout and copy, with original full-resolution photos. The only changes allowed are subtle ones: fade-ins, the mobile menu, accessibility and speed. An earlier redesign was rejected. See CLAUDE.md for the approved deviations.
 - Voice: warm, hopeful, sisterly, plain-spoken. Second person ("you are not alone"), never clinical or pitying. Survivors are "survivors," "fighters" and "thrivers."
 
 ## Evidence on Hand

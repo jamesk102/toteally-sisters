@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Terms of Use" description="Terms of use for the Toteally Sisters website and meetups.">
+  <section class="section legal-page">
+    <div class="legal" data-fade>
+      <h1 class="h-xl">Terms of Use</h1>
+      <p class="text-lg">By using this site or joining our meetups, you agree to these simple terms.</p>
+      <p class="updated">Last updated November 2026</p>
+
+      <h2>Peer support, not medical care</h2>
+      <p>Toteally Sisters is a community of survivors, women in treatment and caregivers sharing their experiences. Nothing on this site or said at our meetups is medical, legal or financial advice. Always talk with your own care team about your health.</p>
+
+      <h2>Meetup guidelines</h2>
+      <ul>
+        <li>What’s shared in the group stays in the group.</li>
+        <li>Be kind. Everyone’s journey and choices are their own.</li>
+        <li>No selling, recruiting or promoting products or treatments.</li>
+        <li>Please don’t record or screenshot meetups.</li>
+      </ul>
+      <p>We may remove anyone who makes the space feel unsafe for others.</p>
+
+      <h2>Donations and events</h2>
+      <p>Donations and event registrations linked from this site are handled by the Ovarian Cancer Research Alliance (OCRA) on its own site and under its own terms.</p>
+
+      <h2>Content and photos</h2>
+      <p>Photos, stories and text on this site belong to Toteally Sisters and the people in them. Please ask before reusing them.</p>
+
+      <h2>Changes</h2>
+      <p>We may update these terms from time to time. The date above shows the latest version.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .legal-page { background: rgb(235 186 217 / 0.24); }
+  .legal { max-width: 800px; margin-inline: auto; background: #fff; border-radius: 30px; padding: 60px; }
+  .legal :global(h2) { font-family: var(--serif); font-weight: 400; font-size: var(--h-sm); line-height: var(--h-sm-lh); letter-spacing: -1px; margin-top: 40px; }
+  .legal :global(p), .legal :global(li) { font-size: 18px; line-height: 28px; margin-top: 12px; }
+  .legal .text-lg { margin-top: 20px; font-size: var(--text-lg); line-height: var(--text-lg-lh); }
+  .updated { color: #555; font-size: 15px !important; }
+  .legal :global(ul) { padding-left: 1.2rem; }
+  @media (max-width: 767px) { .legal { padding: 30px 20px; border-radius: 20px; } .legal-page { padding-inline: 20px; } }
+</style>

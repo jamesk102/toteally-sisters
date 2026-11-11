@@ -21,7 +21,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   // A plain form post (no JavaScript) gets a page back instead of JSON.
   const html = !ct.includes('application/json');
   const reply = (body: { ok: boolean; [k: string]: unknown }, status = 200) =>
-    html ? redirect(body.ok ? '/join/thanks' : '/join/sorry', 303) : json(body, status);
+    html ? redirect(body.ok ? '/get-involved/thanks/' : '/get-involved/sorry/', 303) : json(body, status);
   try {
     input = ct.includes('application/json') ? await request.json() : Object.fromEntries(await request.formData());
   } catch {

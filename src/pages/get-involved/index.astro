@@ -1,0 +1,167 @@
+---
+import Base from '../../layouts/Base.astro';
+import { iAmOptions, heardOptions, meetupOptions, labels } from '../../lib/join-form';
+import { site } from '../../data/site';
+---
+<Base title="Get Involved">
+  <section class="section get-involved">
+    <div class="inner">
+      <div class="head center" data-fade>
+        <h1 class="h-xl">Connect and Thrive</h1>
+        <p class="text-lg">Join our virtual meetups to share experiences and find support from those who truly understand. Fill out the form below and a member from our team will be in touch:</p>
+      </div>
+
+      <form id="join-form" action="/api/join" method="post" novalidate data-fade>
+        <div class="summary" role="alert" tabindex="-1" hidden><p>Please fix the following:</p><ul></ul></div>
+
+        <div class="row">
+          <div class="field half">
+            <label for="firstName">{labels.firstName} <span class="req" aria-hidden="true">*</span></label>
+            <input id="firstName" name="firstName" placeholder="Enter your full name" autocomplete="given-name" required aria-describedby="firstName-err" />
+            <p class="err" id="firstName-err"></p>
+          </div>
+          <div class="field half">
+            <label for="lastName">{labels.lastName} <span class="req" aria-hidden="true">*</span></label>
+            <input id="lastName" name="lastName" placeholder="Enter your last name" autocomplete="family-name" required aria-describedby="lastName-err" />
+            <p class="err" id="lastName-err"></p>
+          </div>
+          <div class="field half">
+            <label for="email">{labels.email} <span class="req" aria-hidden="true">*</span></label>
+            <input id="email" name="email" type="email" inputmode="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required aria-describedby="email-err" />
+            <p class="err" id="email-err"></p>
+          </div>
+          <div class="field half">
+            <label for="phone">{labels.phone}</label>
+            <input id="phone" name="phone" type="tel" inputmode="tel" placeholder="Enter your phone number" autocomplete="tel" />
+          </div>
+          <div class="field">
+            <label for="location">{labels.location}</label>
+            <input id="location" name="location" placeholder="Enter your city and state" autocomplete="address-level2" />
+          </div>
+          <div class="field">
+            <label for="iAm">{labels.iAm}</label>
+            <div class="select"><select id="iAm" name="iAm"><option value="">Choose one</option>{iAmOptions.map((o) => <option>{o}</option>)}</select></div>
+          </div>
+          <div class="field">
+            <label for="cancerType">{labels.cancerType}</label>
+            <input id="cancerType" name="cancerType" placeholder="Enter your cancer type (if comfortable)" />
+          </div>
+          <div class="field">
+            <label for="hopes">{labels.hopes}</label>
+            <textarea id="hopes" name="hopes" rows="4" placeholder="Share what you’re looking for—community, healing, support..."></textarea>
+          </div>
+          <div class="field">
+            <label for="heard">{labels.heard}</label>
+            <div class="select"><select id="heard" name="heard"><option value="">Choose one</option>{heardOptions.map((o) => <option>{o}</option>)}</select></div>
+          </div>
+          <div class="field">
+            <label for="meetup">{labels.meetup}</label>
+            <div class="select"><select id="meetup" name="meetup"><option value="">Choose one</option>{meetupOptions.map((o) => <option>{o}</option>)}</select></div>
+          </div>
+          <div class="field">
+            <label for="more">{labels.more}</label>
+            <textarea id="more" name="more" rows="4" placeholder="Write anything else you’d like us to know"></textarea>
+          </div>
+        </div>
+
+        <div class="hp" aria-hidden="true"><label for="website">Leave this empty</label><input id="website" name="website" tabindex="-1" autocomplete="off" /></div>
+        <input type="hidden" name="started" value="" />
+
+        <button class="btn submit" type="submit"><span class="label">Submit</span><span class="sending">Sending…</span></button>
+        <p class="status" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="thanks center" tabindex="-1" hidden>
+        <h2 class="h-sm">Thank you!</h2>
+        <p class="text-lg">Your message was sent. A member from our team will be in touch.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script define:vars={{ instagram: site.instagram }}>
+  const form = document.getElementById('join-form');
+  const summary = form.querySelector('.summary');
+  const status = form.querySelector('.status');
+  const thanks = document.querySelector('.thanks');
+  form.started.value = String(Date.now());
+  const required = ['firstName', 'lastName', 'email'];
+  const setError = (name, msg) => {
+    const input = form.elements[name]; const err = document.getElementById(name + '-err');
+    input.setAttribute('aria-invalid', msg ? 'true' : 'false'); err.textContent = msg || '';
+  };
+  const check = () => {
+    const e = {}; const v = (n) => form.elements[n].value.trim();
+    if (!v('firstName')) e.firstName = 'Please enter your first name.';
+    if (!v('lastName')) e.lastName = 'Please enter your last name.';
+    if (!v('email')) e.email = 'Please enter your email address.';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('email'))) e.email = 'That email address doesn’t look quite right.';
+    return e;
+  };
+  const show = (errors) => {
+    required.forEach((n) => setError(n, errors[n]));
+    const keys = Object.keys(errors); const ul = summary.querySelector('ul'); ul.innerHTML = '';
+    keys.forEach((k) => { const li = document.createElement('li'); const a = document.createElement('a'); a.href = '#' + k; a.textContent = errors[k]; li.append(a); ul.append(li); });
+    summary.hidden = !keys.length; if (keys.length) summary.focus();
+  };
+  let tried = false;
+  form.addEventListener('focusout', (e) => { if (tried && required.includes(e.target.name)) setError(e.target.name, check()[e.target.name]); });
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault(); tried = true;
+    const errors = check(); if (Object.keys(errors).length) return show(errors);
+    show({}); form.classList.add('is-sending'); form.querySelector('.submit').disabled = true; status.textContent = '';
+    try {
+      const res = await fetch(form.action, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(Object.fromEntries(new FormData(form))) });
+      const body = await res.json().catch(() => ({}));
+      if (res.ok && body.ok) { form.hidden = true; thanks.hidden = false; thanks.focus(); return; }
+      if (body.error === 'invalid' && body.errors) return show(body.errors);
+      throw new Error(body.error || 'failed');
+    } catch {
+      status.innerHTML = ''; status.append('Sorry, your message didn’t send. Your answers are still here, so please try again in a moment, or message us on ');
+      const a = document.createElement('a'); a.href = instagram; a.textContent = 'Instagram'; status.append(a, '.');
+    } finally { form.classList.remove('is-sending'); form.querySelector('.submit').disabled = false; }
+  });
+</script>
+
+<style>
+  .get-involved { background: rgb(235 186 217 / 0.34); padding-block: 100px 140px; }
+  .inner { max-width: 750px; margin-inline: auto; }
+  .head { display: grid; gap: 15px; }
+  form, .thanks { margin-top: 40px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 30px; }
+  .field { grid-column: 1 / -1; margin-bottom: 25px; }
+  .field.half { grid-column: auto; }
+  label { display: block; font-size: 15px; line-height: 20px; margin-bottom: 8px; }
+  .req { color: #c0392b; }
+  input:not([type='hidden']), textarea, select {
+    width: 100%; min-height: 47px; padding: 6px 16px; background: #fff; border: 1px solid transparent; border-radius: 15px;
+    font-size: 16px; line-height: 1.5; transition: border-color 200ms var(--ease), box-shadow 200ms var(--ease);
+  }
+  textarea { padding-block: 10px; resize: vertical; }
+  input::placeholder, textarea::placeholder { color: #767676; }
+  input:focus-visible, textarea:focus-visible, select:focus-visible { outline: none; border-color: var(--purple); box-shadow: 0 0 0 3px rgb(103 59 152 / 0.3); }
+  [aria-invalid='true'] { border-color: #b3261e; }
+  .select { position: relative; }
+  .select select { appearance: none; padding-right: 44px; }
+  .select::after { content: ''; position: absolute; right: 18px; top: 50%; width: 8px; height: 8px; border-right: 2px solid #000; border-bottom: 2px solid #000; transform: translateY(-70%) rotate(45deg); pointer-events: none; }
+  .err { margin-top: 6px; font-size: 14px; color: #b3261e; font-weight: 600; }
+  .err:empty { display: none; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .submit { width: 100%; margin-top: 15px; font-size: 14px; }
+  .submit .sending { display: none; }
+  .is-sending .submit .label { display: none; }
+  .is-sending .submit .sending { display: inline; }
+  .submit:disabled { opacity: 0.75; cursor: progress; }
+  .status { margin-top: 15px; }
+  .status:empty { display: none; }
+  .summary { background: #fff; border: 2px solid #b3261e; border-radius: 15px; padding: 15px 20px; margin-bottom: 25px; font-size: 16px; }
+  .summary ul { margin-top: 6px; padding-left: 20px; }
+  .summary a { color: #8c1d18; }
+  .thanks { background: #fff; border-radius: 30px; padding: 40px; display: grid; gap: 10px; }
+  .thanks:focus { outline: none; }
+  [hidden] { display: none !important; }
+  @media (max-width: 767px) {
+    .get-involved { padding: 40px 20px 60px; }
+    .row { grid-template-columns: 1fr; }
+  }
+</style>

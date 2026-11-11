@@ -1,0 +1,52 @@
+---
+/**
+ * Crossfading background slideshow, like the original's Elementor slideshows.
+ * Full-resolution original photos. Only the first loads eagerly; the rest lazy-load.
+ * Under reduced motion it shows the first photo only.
+ */
+interface Slide { src: string; alt: string; position?: string }
+interface Props { slides: Slide[]; interval?: number; eager?: boolean; class?: string }
+const { slides, interval = 5000, eager = false, class: cls = '' } = Astro.props;
+---
+<div class:list={['slideshow', cls]} data-slideshow data-interval={interval}>
+  {slides.map((s, i) => (
+    <img
+      src={s.src}
+      alt={s.alt}
+      class:list={{ active: i === 0 }}
+      style={s.position ? `object-position:${s.position}` : undefined}
+      loading={i === 0 && eager ? 'eager' : 'lazy'}
+      fetchpriority={i === 0 && eager ? 'high' : undefined}
+      decoding="async"
+      aria-hidden={i === 0 ? undefined : 'true'}
+    />
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-slideshow]').forEach((box) => {
+    const imgs = [...box.querySelectorAll('img')];
+    if (imgs.length < 2 || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let i = 0;
+    const ms = Number(box.dataset.interval) || 5000;
+    let timer: number | undefined;
+    const next = () => {
+      imgs[i].classList.remove('active'); imgs[i].setAttribute('aria-hidden', 'true');
+      i = (i + 1) % imgs.length;
+      imgs[i].loading = 'eager';
+      imgs[i].classList.add('active'); imgs[i].removeAttribute('aria-hidden');
+      imgs[(i + 1) % imgs.length].loading = 'eager'; // warm the next one
+    };
+    const start = () => { if (!timer) timer = window.setInterval(next, ms); };
+    const stop = () => { window.clearInterval(timer); timer = undefined; };
+    // Only run while visible and the tab is open.
+    new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop())).observe(box);
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+  });
+</script>
+
+<style>
+  .slideshow { position: relative; overflow: hidden; }
+  .slideshow img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1200ms ease-in-out; }
+  .slideshow img.active { opacity: 1; }
+</style>

@@ -1,69 +1,68 @@
 ---
-import logo from '../assets/brand/logo.svg';
-import ocra from '../assets/brand/ocra-partner.svg';
 import { site } from '../data/site';
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer on-dark">
-  <div class="wrap grid">
+  <div class="grid">
     <div class="about">
-      <a href="/" aria-label="Toteally Sisters, home"><img src={logo.src} width="176" height="80" alt="" /></a>
-      <p>A community rooted in connection, courage and care for every woman affected by gynecologic cancer.</p>
-      <a class="btn btn--light" href="/join">Join a meetup</a>
+      <a href="/" aria-label="Toteally Sisters, home"><img src="/images/toteallySistersLogo.svg" width="240" height="109" alt="" /></a>
+      <p>A community rooted in connection, courage, and care for every woman impacted by gynecologic cancer.</p>
+      <ul class="social">
+        <li><a href={site.facebook} rel="noopener" aria-label="Facebook"><svg aria-hidden="true" viewBox="0 0 24 24" width="25" height="25" fill="currentColor"><path d="M12 2a10 10 0 0 0-1.6 19.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7A10 10 0 0 0 12 2z"/></svg></a></li>
+        <li><a href={site.instagram} rel="noopener" aria-label="Instagram"><svg aria-hidden="true" viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a></li>
+      </ul>
     </div>
-
-    <nav aria-label="Footer">
-      <p class="col-title">Find your way</p>
+    <nav aria-labelledby="f-quick">
+      <h2 id="f-quick" class="col-title">Quick Links</h2>
       <ul>
-        <li><a href="/our-story">Our Story</a></li>
-        <li><a href="/monthly-meetup">Monthly Meetup</a></li>
-        <li><a href="/events">Events</a></li>
-        <li><a href="/in-the-news">In the News</a></li>
-        <li><a href="/join">Join</a></li>
+        <li><a href={site.ocraHome} rel="noopener">Donate Today</a></li>
+        <li><a href="/sister-support/">Sister Support</a></li>
+        <li><a href="/events/">Events</a></li>
+        <li><a href="/get-involved/">Get Involved</a></li>
       </ul>
     </nav>
-
-    <div>
-      <p class="col-title">Follow along</p>
-      <ul class="social">
-        <li><a href={site.instagram} rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a></li>
-        <li><a href={site.facebook} rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg>Facebook</a></li>
+    <nav aria-labelledby="f-about">
+      <h2 id="f-about" class="col-title">About</h2>
+      <ul>
+        <li><a href="/our-story/">Our Story</a></li>
+        <li><a href="/press-news/">In The News</a></li>
+        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+        <li><a href="/terms-of-use/">Terms of Use</a></li>
       </ul>
-      <p class="col-title">Support research</p>
-      <a class="ocra" href={site.ocraHome} rel="noopener">
-        <img src={ocra.src} width="200" height="50" alt="Ovarian Cancer Research Alliance, community partner" />
-      </a>
-      <p class="small">Donations go directly to the Ovarian Cancer Research Alliance. <a href={site.ocraDonate} rel="noopener">Donate via OCRA</a></p>
+    </nav>
+    <div class="partner">
+      <img src="/images/ocraCommunityPartner.svg" width="260" height="65" alt="Ovarian Cancer Research Alliance 2025 Community Partner" loading="lazy" />
     </div>
   </div>
-  <div class="wrap legal">
-    <p>© {year} Toteally Sisters</p>
-    <ul>
-      <li><a href="/privacy">Privacy</a></li>
-      <li><a href="/terms">Terms</a></li>
-    </ul>
-  </div>
+  <div class="legal"><p>© {year} Toteally Sisters. All rights reserved.</p></div>
 </footer>
 
 <style>
-  .site-footer { background: var(--night); color: #f3e8f2; padding-block: clamp(3.5rem, 6vw, 5.5rem) calc(2.5rem + 80px + env(safe-area-inset-bottom)); }
-  .grid { display: grid; gap: 2.75rem; }
-  .about img { height: 64px; width: auto; }
-  .about p { margin-block: 1.25rem 1.5rem; max-width: 30ch; font-size: var(--step-0); }
-  .col-title { font-weight: 700; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--pink-strong); margin-bottom: 0.9rem; }
-  ul { list-style: none; padding: 0; }
-  nav ul { display: grid; gap: 0.35rem; }
-  nav a, .social a { text-decoration: none; display: inline-flex; align-items: center; gap: 0.6rem; min-height: 44px; }
-  nav a:hover, .social a:hover { text-decoration: underline; text-decoration-color: var(--peach); }
-  .social { display: grid; gap: 0.25rem; margin-bottom: 1.75rem; }
-  .ocra { display: inline-block; background: #fff; padding: 0.6rem 0.8rem; border-radius: 10px; }
-  .ocra img { height: 40px; width: auto; }
-  .small { margin-top: 0.75rem; font-size: var(--step--1); color: #d9c8db; max-width: 34ch; }
-  .legal {
-    margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgb(255 255 255 / 0.14);
-    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; font-size: var(--step--1); color: #d9c8db;
+  .site-footer { background: #000; color: #fff; padding: 100px 30px 90px; }
+  .grid { max-width: 1380px; margin-inline: auto; display: grid; grid-template-columns: 360px 240px 240px 1fr; column-gap: 60px; align-items: start; }
+  .about img { width: 240px; height: auto; }
+  .about p { margin-top: 30px; font-size: 18px; line-height: 25.2px; font-weight: 500; max-width: 360px; }
+  .social { list-style: none; padding: 0; margin-top: 30px; display: flex; gap: 15px; }
+  .social a { display: inline-flex; width: 50px; height: 50px; align-items: center; justify-content: center; border-radius: 10%; background: #262626; color: #fff; transition: opacity 200ms var(--ease); }
+  .social li:first-child a { background: #3b5998; }
+  .social a:hover { opacity: 0.85; }
+  .col-title { font-family: var(--sans); font-size: 14px; line-height: 14px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--teal); margin-bottom: 30px; }
+  nav ul { list-style: none; padding: 0; display: grid; gap: 15px; }
+  nav a { font-size: 16px; line-height: 20px; text-decoration: none; transition: color 200ms var(--ease); }
+  nav a:hover { color: var(--peach); }
+  .partner { justify-self: end; background: #fff; border: 2px solid var(--teal); border-radius: 8px; padding: 8px 10px; }
+  .partner img { display: block; }
+  .partner img { width: 260px; height: auto; }
+  .legal { max-width: 1380px; margin: 60px auto 0; padding-top: 60px; border-top: 1px solid #333; text-align: center; font-size: 16px; line-height: 24px; }
+  @media (max-width: 1024px) {
+    .grid { grid-template-columns: 1fr 1fr; row-gap: 50px; }
+    .partner { justify-self: start; }
   }
-  .legal ul { display: flex; gap: 1.5rem; }
-  @media (min-width: 800px) { .grid { grid-template-columns: 1.4fr 1fr 1.2fr; } }
-  @media (min-width: 1000px) { .site-footer { padding-bottom: 2.5rem; } }
+  @media (max-width: 767px) {
+    .site-footer { padding: 60px 20px calc(40px + env(safe-area-inset-bottom)); }
+    .grid { grid-template-columns: 1fr; }
+    .about img { width: 200px; }
+    .about p { font-size: 16px; line-height: 22px; }
+    .legal { margin-top: 40px; padding-top: 30px; text-align: left; font-size: 14px; }
+  }
 </style>
