@@ -30,7 +30,7 @@ const { upcoming, past } = await getEvents();
         {upcoming.map((e, i) => <EventItem event={e} index={i} />)}
       </ul>
       <div class="empty" data-empty hidden={upcoming.length > 0}>
-        <h3>The next gathering is <em>being planned</em></h3>
+        <h3>The next gathering is being planned</h3>
         <p>New dates go up here and on Instagram first. Until then, come say hello at the monthly meetup.</p>
         <div class="next-step">
           <a class="btn" href="/join">Join a meetup</a>

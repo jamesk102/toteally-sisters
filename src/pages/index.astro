@@ -52,7 +52,7 @@ const recent = past.slice(0, 3);
   <section class="section founders" aria-labelledby="founders-title">
     <div class="wrap founders-grid">
       <div class="founders-copy">
-        <h2 id="founders-title">Started by two women who’ve <em>been there</em></h2>
+        <h2 id="founders-title">Started by two women who’ve been there</h2>
         <p class="lede">Sherry Baird and Mai Linh Nguyen Achong met as patients. They knew women like them needed more than awareness. They needed each other.</p>
         <div class="next-step"><a class="link-arrow" href="/our-story">Read their story <span aria-hidden="true">→</span></a></div>
       </div>
@@ -75,7 +75,7 @@ const recent = past.slice(0, 3);
       <Print class="meetup-photo" src={zoom} tilt={-1.5} tape="pink" position="top" sizes="(min-width: 1000px) 34vw, 86vw"
         alt="Ten women in a Zoom gallery view, smiling, one holding a Good Vibes Only neon sign." />
       <div>
-        <h2 id="meetup-title">What happens at a <em>meetup</em></h2>
+        <h2 id="meetup-title">What happens at a meetup</h2>
         <p class="lede">Once a month we log on, check in and talk about whatever is on our minds. Some nights are full of laughter. Some are quiet. All of it is welcome.</p>
         <ul class="truths">
           <li><strong>It’s free.</strong> Always.</li>
@@ -95,7 +95,7 @@ const recent = past.slice(0, 3);
   <section class="section gatherings ground-board" aria-labelledby="gather-title">
     <div class="wrap">
       <div class="gather-head">
-        <h2 id="gather-title">When we’re <em>together</em></h2>
+        <h2 id="gather-title">When we’re together</h2>
         <p class="lede">Around Orlando we show up for each other in person too: fitness fundraisers, give-back nights, ice cream.</p>
       </div>
 
@@ -111,7 +111,7 @@ const recent = past.slice(0, 3);
         </article>
       ) : (
         <div class="empty-invite">
-          <h3>The next gathering is <em>being planned</em></h3>
+          <h3>The next gathering is being planned</h3>
           <p>New dates go up here and on Instagram first. Until then, the monthly meetup is the best way to meet everyone.</p>
           <div class="next-step">
             <a class="btn" href="/join">Join a meetup</a>
@@ -201,7 +201,7 @@ const recent = past.slice(0, 3);
   .founders-grid { display: grid; gap: 3rem 2.5rem; }
   .founders-copy .lede { margin-top: 1.25rem; max-width: 34rem; }
   .founder :global(.print) { aspect-ratio: 4 / 5; max-width: 22rem; }
-  .founder blockquote { margin-top: 1.5rem; font-family: var(--font-display); font-size: var(--step-2); line-height: 1.12; max-width: 22rem; }
+  .founder blockquote { text-wrap: balance; margin-top: 1.5rem; font-family: var(--font-display); font-size: var(--step-2); line-height: 1.12; max-width: 22rem; }
   .founder cite { display: block; margin-top: 0.75rem; font-family: var(--font-body); font-style: normal; font-weight: 700; font-size: 0.95rem; color: var(--ink-soft); }
   @media (min-width: 1000px) {
     .founders-grid { grid-template-columns: 1.1fr 1fr 1fr; align-items: start; }

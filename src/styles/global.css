@@ -34,7 +34,7 @@
   --ink: #1d1320;           /* body text, tinted plum-black */
   --ink-soft: #4a3b4e;      /* secondary text on light grounds: 9:1 on white */
   --night: #120c14;         /* header and footer */
-  --paper: #fffaf6;         /* print borders, light panels */
+  --paper: #ffffff;         /* print borders, light panels */
   --line: rgb(29 19 32 / 0.14);
 
   /* Type */
@@ -50,7 +50,7 @@
   /* Space */
   --gutter: clamp(1rem, 0.4rem + 3vw, 4rem);
   --section: clamp(4.5rem, 3rem + 6vw, 8.5rem);
-  --measure: 66ch;
+  --measure: 36rem;
 
   /* Shape and depth */
   --radius: 14px;

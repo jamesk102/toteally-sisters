@@ -33,6 +33,24 @@
         ],
         "createdAt": "2026-11-11T00:05:47.230Z",
         "reason": "brand commitment: incumbent purple #673B98 and Instrument Serif italic accent kept per PRODUCT.md; scoped to decision sketches, re-judge on the real build"
+      },
+      {
+        "rule": "ai-color-palette",
+        "value": "*",
+        "files": [
+          "src/**"
+        ],
+        "createdAt": "2026-11-11T00:23:38.288Z",
+        "reason": "brand commitment: incumbent purple #673B98 and Instrument Serif italic accent kept per PRODUCT.md Brand Commitments; accent limited to page titles and signature lines after the 2026-11 build triage"
+      },
+      {
+        "rule": "italic-serif-display",
+        "value": "*",
+        "files": [
+          "src/**"
+        ],
+        "createdAt": "2026-11-11T00:23:38.297Z",
+        "reason": "brand commitment: incumbent purple #673B98 and Instrument Serif italic accent kept per PRODUCT.md Brand Commitments; accent limited to page titles and signature lines after the 2026-11 build triage"
       }
     ]
   }
