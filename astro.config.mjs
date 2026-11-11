@@ -5,7 +5,7 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
   site: 'https://toteallysisters.org',
   adapter: vercel(),
-  trailingSlash: 'ignore',
+  trailingSlash: 'always', // like the original WordPress site: /our-story/
   devToolbar: { enabled: false },
   // The site keeps the original WordPress addresses. These forward the redesign's
   // short-lived addresses (and the old empty Contact Us page) to the originals.
