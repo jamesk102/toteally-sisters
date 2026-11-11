@@ -81,7 +81,7 @@ const isCurrent = (href: string) => path === href.replace(/\/$/, '');
   .get-involved { font-size: 14px; padding: 16px 30px; }
   .get-involved[aria-current='page'] { background: #fff; color: var(--purple); border-color: #fff; }
   .menu-toggle { display: none; background: none; border: 0; color: #fff; width: 48px; height: 48px; align-items: center; justify-content: center; }
-  .menu-toggle path { transition: transform 220ms var(--ease), opacity 220ms var(--ease); transform-origin: center; }
+  .menu-toggle path { transition: transform 220ms var(--ease), opacity 220ms var(--ease); transform-box: fill-box; transform-origin: center; }
   .menu-toggle[aria-expanded='true'] .l1 { transform: translateY(5px) rotate(45deg); }
   .menu-toggle[aria-expanded='true'] .l2 { opacity: 0; }
   .menu-toggle[aria-expanded='true'] .l3 { transform: translateY(-5px) rotate(-45deg); }
