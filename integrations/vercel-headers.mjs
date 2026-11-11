@@ -44,9 +44,10 @@ export default function vercelHeaders({ productionHost = 'toteallysisters.org', 
           { src: '/(images|media)/(.*)', headers: { 'cache-control': 'public, max-age=604800, stale-while-revalidate=86400' }, continue: true },
           { src: '/fonts/(.*)', headers: { 'cache-control': 'public, max-age=2592000, stale-while-revalidate=86400' }, continue: true },
         ];
-        // Keep the *.vercel.app address out of search results; the real site is the custom domain.
-        if (vercelHost) routes.push({ src: '/(.*)', has: [{ type: 'host', value: vercelHost }], headers: { 'X-Robots-Tag': 'noindex' }, continue: true });
-        config.routes = [...routes, ...(config.routes ?? [])];
+        // Send visitors of the production *.vercel.app address to the same page on the real domain.
+        // (Per-deployment preview URLs use other hostnames and are unaffected.)
+        const redirect = vercelHost ? [{ src: '/(.*)', has: [{ type: 'host', value: vercelHost }], headers: { Location: `https://${productionHost}/$1` }, status: 308 }] : [];
+        config.routes = [...redirect, ...routes, ...(config.routes ?? [])];
         await writeFile(file, JSON.stringify(config, null, 2));
         logger.info(`Added security and cache headers (production host ${productionHost}).`);
       },
