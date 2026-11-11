@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import Arrow from '../components/Arrow.astro';
+---
+<Base title="Page Not Found">
+  <section class="section not-found">
+    <div class="inner center" data-fade>
+      <h1 class="h-xl">Page Not Found</h1>
+      <p class="text-lg">Sorry, the page you’re looking for doesn’t exist or has moved.</p>
+      <a class="btn" href="/">Back to Home <Arrow /></a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .not-found { background: rgb(235 186 217 / 0.34); padding-block: 160px; }
+  .inner { max-width: 700px; margin-inline: auto; display: grid; gap: 20px; justify-items: center; }
+  .btn { margin-top: 20px; }
+  @media (max-width: 767px) { .not-found { padding-block: 80px; } }
+</style>
