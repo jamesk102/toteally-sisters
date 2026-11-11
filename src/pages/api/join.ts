@@ -44,7 +44,9 @@ export const POST: APIRoute = async ({ request, redirect }) => {
 
   const key = process.env.RESEND_API_KEY;
   const to = process.env.JOIN_TO_EMAIL;
-  const from = process.env.JOIN_FROM_EMAIL ?? 'Toteally Sisters <onboarding@resend.dev>';
+  // Always show "Toteally Sisters" as the sender name, even if JOIN_FROM_EMAIL is a bare address.
+  const fromAddr = (process.env.JOIN_FROM_EMAIL ?? 'onboarding@resend.dev').trim();
+  const from = fromAddr.includes('<') ? fromAddr : `Toteally Sisters <${fromAddr}>`;
   if (!key || !to) return reply({ ok: false, error: 'not_configured' }, 503);
   const test = TEST_INBOX.test(data.email);
   const recipients = test ? [data.email] : to.split(',').map((s: string) => s.trim());
