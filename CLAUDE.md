@@ -67,7 +67,7 @@ Installed in `.claude/skills/`. When guidance conflicts, follow this order:
 - [x] Domain pointed at Vercel.
 - [x] Alt text written for every content image.
 - [x] News video kept at full 1280×720 (`public/media/ovarian-cancer-awareness.mp4`).
-- [x] `main` branch created for Vercel production. Optional: make `main` the default branch in GitHub (Settings → General → Default branch).
+- [x] `main` is the production branch and the GitHub default branch.
 
 ## Next steps
 
