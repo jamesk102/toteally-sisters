@@ -7,7 +7,7 @@ Rebuilding **toteallysisters.org**, currently on WordPress + Elementor, as a new
 ## Read first
 
 - `PRODUCT.md`: audience, purpose, the OCRA partnership, voice, accessibility, and what not to fabricate. **This is the top authority for every design decision.**
-- `DESIGN.md` (once written) and `.impeccable/surfaces/src-pages-index-astro.md` (the home page direction contract: "the community board").
+- `DESIGN.md` (the design system: "The Community Corkboard"; `.impeccable/design.json` is its sidecar) and `.impeccable/surfaces/src-pages-index-astro.md` (the home page direction contract: "the community board").
 - `_source/README.md`: snapshot of the current site (media, fonts, brand colors, page inventory, links). Page copy is in `_source/content/text/`, and all media is indexed in `_source/media/INDEX.md`.
 
 ## Decisions already made
@@ -71,7 +71,7 @@ Installed in `.claude/skills/`. When guidance conflicts, follow this order:
 - [ ] Resend account, a verified sending domain, and the Vercel env vars above.
 - [x] Alt text written for every content image.
 - [x] Awareness video compressed to 12 MB (`public/media/wesh-ovarian-awareness.mp4`).
-- [ ] Create a `main` branch for Vercel production. Right now `claude/peaceful-lovelace-oaug59` is the only (and default) branch.
+- [x] `main` branch created for Vercel production. Optional: make `main` the default branch in GitHub (Settings → General → Default branch).
 
 ## Next steps
 
