@@ -1,0 +1,79 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import MeetupInvite from '../../components/MeetupInvite.astro';
+import EventItem from '../../components/EventItem.astro';
+import { getEvents } from '../../lib/events';
+import { site } from '../../data/site';
+const { upcoming, past } = await getEvents();
+---
+<Base title="Events" description="Toteally Sisters gatherings: the free monthly Zoom meetup plus fundraisers and get-togethers around Orlando.">
+  <PageHead
+    title="Gatherings, on Zoom and <em>around Orlando</em>"
+    lede="The monthly meetup happens every month, wherever you are. In person, we show up for each other at fundraisers, give-back nights and the occasional ice cream."
+  />
+
+  <section class="section" aria-labelledby="every-month">
+    <div class="wrap every">
+      <div>
+        <h2 id="every-month">Every month</h2>
+        <p class="lede">Our free monthly meetup on Zoom is the heart of Toteally Sisters. It’s the easiest way to meet everyone.</p>
+      </div>
+      <MeetupInvite primary headingLevel="h3" />
+    </div>
+  </section>
+
+  <section class="section ground-board" aria-labelledby="upcoming-title">
+    <div class="wrap">
+      <h2 id="upcoming-title">Coming up</h2>
+      <ul class="list" data-upcoming>
+        {upcoming.map((e, i) => <EventItem event={e} index={i} />)}
+      </ul>
+      <div class="empty" data-empty hidden={upcoming.length > 0}>
+        <h3>The next gathering is <em>being planned</em></h3>
+        <p>New dates go up here and on Instagram first. Until then, come say hello at the monthly meetup.</p>
+        <div class="next-step">
+          <a class="btn" href="/join">Join a meetup</a>
+          <a class="link-arrow" href={site.instagram} rel="noopener">Follow on Instagram <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="past-title" data-past-section hidden={past.length === 0}>
+    <div class="wrap">
+      <h2 id="past-title">Past events</h2>
+      <ul class="list" data-past>
+        {past.map((e, i) => <EventItem event={e} index={i} past />)}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Re-check dates against the visitor's clock, so an event that ended since the last deploy moves to "Past events".
+  const up = document.querySelector('[data-upcoming]');
+  const past = document.querySelector('[data-past]');
+  if (up && past) {
+    const now = Date.now();
+    up.querySelectorAll<HTMLElement>('[data-event-end]').forEach((li) => {
+      if (Number(li.dataset.eventEnd) < now) past.prepend(li);
+    });
+    if (!up.children.length) document.querySelector<HTMLElement>('[data-empty]')!.hidden = false;
+    if (past.children.length) document.querySelector<HTMLElement>('[data-past-section]')!.hidden = false;
+  }
+</script>
+
+<style>
+  .every { display: grid; gap: 2.5rem; align-items: center; }
+  .every .lede { margin-top: 1rem; max-width: 34rem; }
+  @media (min-width: 900px) { .every { grid-template-columns: 1fr auto; gap: 4rem; } }
+  .list { list-style: none; padding: 0; margin-top: 2.5rem; display: grid; gap: clamp(3.5rem, 6vw, 5.5rem); }
+  .list:empty { display: none; }
+  .empty {
+    margin-top: 2.5rem; background: var(--paper); padding: clamp(1.5rem, 1rem + 2vw, 2.5rem); max-width: 44rem;
+    box-shadow: var(--shadow-card); transform: rotate(-0.6deg);
+  }
+  .empty p { margin-top: 0.85rem; }
+  [hidden] { display: none !important; }
+</style>

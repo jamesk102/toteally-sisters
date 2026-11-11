@@ -1,0 +1,73 @@
+---
+/**
+ * A real photo pinned to the board: white border, a strip of tape, a slight tilt.
+ * Optional `tag` is a small truthful place/date ticket.
+ */
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  tilt?: number;
+  tape?: 'teal' | 'pink';
+  tag?: string;
+  widths?: number[];
+  sizes?: string;
+  position?: string;
+  loading?: 'eager' | 'lazy';
+  class?: string;
+  settle?: number; // index for the one-time settle animation; omit for none
+}
+const {
+  src, alt, tilt = 0, tape = 'teal', tag, widths = [360, 560, 820], sizes = '(min-width: 1000px) 26vw, 80vw',
+  position = 'center', loading = 'lazy', class: cls = '', settle,
+} = Astro.props;
+---
+<figure
+  class:list={['print', cls, { settle: settle !== undefined }]}
+  style={`--tilt:${tilt}deg; --i:${settle ?? 0}; --pos:${position}`}
+>
+  <span class:list={['tape', tape]} aria-hidden="true"></span>
+  <Picture src={src} alt={alt} widths={widths} sizes={sizes} formats={['avif', 'webp']} fallbackFormat="jpg" loading={loading} />
+  {tag && <figcaption class="ticket">{tag}</figcaption>}
+</figure>
+
+<style>
+  .print {
+    position: relative;
+    background: var(--paper);
+    padding: clamp(8px, 0.9vw, 13px) clamp(8px, 0.9vw, 13px) clamp(10px, 1.1vw, 16px);
+    box-shadow: var(--shadow-print);
+    transform: rotate(var(--tilt));
+  }
+  .print :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos); }
+  .print :global(picture) { display: block; height: 100%; }
+  .tape {
+    position: absolute; top: -12px; left: 50%; z-index: 1;
+    width: clamp(70px, 7vw, 104px); height: 26px;
+    transform: translateX(-50%) rotate(-4deg);
+    mix-blend-mode: multiply;
+  }
+  .tape.teal { background: rgb(13 167 167 / 0.45); }
+  .tape.pink { background: rgb(235 186 217 / 0.85); }
+  .ticket {
+    position: absolute; right: -10px; bottom: -14px;
+    background: #fff; color: var(--ink);
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.01em;
+    padding: 0.3rem 0.6rem; transform: rotate(3deg);
+    box-shadow: 0 1px 2px rgb(18 12 20 / 0.12), 0 6px 12px -6px rgb(18 12 20 / 0.35);
+  }
+
+  /* The one authored moment: prints settle onto the board once. */
+  @media (prefers-reduced-motion: no-preference) {
+    .settle {
+      animation: settle 620ms var(--ease-settle) both;
+      animation-delay: calc(var(--i) * 70ms + 80ms);
+    }
+    @keyframes settle {
+      from { opacity: 0; transform: translateY(-14px) rotate(calc(var(--tilt) - 4deg)) scale(1.03); }
+      to { opacity: 1; transform: rotate(var(--tilt)); }
+    }
+  }
+</style>

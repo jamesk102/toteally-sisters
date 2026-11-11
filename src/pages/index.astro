@@ -1,0 +1,247 @@
+---
+import Base from '../layouts/Base.astro';
+import Print from '../components/Print.astro';
+import MeetupInvite from '../components/MeetupInvite.astro';
+import JoinSteps from '../components/JoinSteps.astro';
+import { getEvents, formatDate, formatShort, eventHref } from '../lib/events';
+
+import founders from '../assets/photos/founders-dr-mckenzie.webp';
+import zoom from '../assets/photos/zoom-meetup.png';
+import fountain from '../assets/photos/fountain.webp';
+import tealDay from '../assets/photos/wear-teal-day.jpg';
+import sherry from '../assets/photos/sherry.jpg';
+import mai from '../assets/photos/mai.png';
+import lakeside from '../assets/photos/lakeside.jpg';
+
+const { upcoming, past } = await getEvents();
+const next = upcoming[0];
+const recent = past.slice(0, 3);
+---
+<Base title="Toteally Sisters">
+  <!-- ─────────── First viewport: the board ─────────── -->
+  <section class="hero ground-board" aria-labelledby="hero-title">
+    <div class="hero-inner">
+      <div class="copy">
+        <h1 id="hero-title">You don’t have to do this <em>alone.</em></h1>
+        <p class="lede">
+          A free community for women facing gynecologic cancer, and the people who love them. Founded by two survivors.{' '}
+          <strong>We meet on Zoom every month.</strong>
+        </p>
+        <ul class="welcome" aria-label="Everyone is welcome">
+          <li>Ovarian</li><li>Uterine</li><li>Cervical</li><li>Vulvar</li><li>In treatment or after</li><li>Caregivers</li>
+        </ul>
+      </div>
+
+      <div class="board">
+        <Print class="p-founders" src={founders} tilt={-3} tape="teal" settle={0} loading="eager" position="50% 30%"
+          alt="Mai Linh, Dr. Nathalie McKenzie and Sherry standing together at an event, smiling." />
+        <Print class="p-zoom" src={zoom} tilt={2.5} tape="pink" settle={1} loading="eager" position="top"
+          alt="A grid of women smiling on a monthly Toteally Sisters Zoom call." />
+        <Print class="p-fountain" src={fountain} tilt={2} tape="pink" settle={2}
+          alt="Three women raising their arms in celebration by the fountain at Lake Eola." />
+        <Print class="p-teal" src={tealDay} tilt={-2} tape="teal" settle={3} position="100% 55%"
+          alt="A collage of women wearing teal for National Wear Teal Day." />
+        <div class="invite-slot"><MeetupInvite primary settle={2} /></div>
+      </div>
+
+      <JoinSteps class="hero-steps" />
+    </div>
+  </section>
+
+  <!-- ─────────── Founders ─────────── -->
+  <section class="section founders" aria-labelledby="founders-title">
+    <div class="wrap founders-grid">
+      <div class="founders-copy">
+        <h2 id="founders-title">Started by two women who’ve <em>been there</em></h2>
+        <p class="lede">Sherry Baird and Mai Linh Nguyen Achong met as patients. They knew women like them needed more than awareness. They needed each other.</p>
+        <div class="next-step"><a class="link-arrow" href="/our-story">Read their story <span aria-hidden="true">→</span></a></div>
+      </div>
+      <figure class="founder f-sherry">
+        <Print src={sherry} tilt={-2} tape="pink" position="50% 20%" sizes="(min-width: 1000px) 22vw, 70vw"
+          alt="Sherry Baird in a teal 5K shirt and heart-shaped teal sunglasses, smiling." />
+        <blockquote>“Ovarian cancer has made me a better human.”<cite>Sherry Baird</cite></blockquote>
+      </figure>
+      <figure class="founder f-mai">
+        <Print src={mai} tilt={2} tape="teal" position="50% 18%" sizes="(min-width: 1000px) 22vw, 70vw"
+          alt="Mai Linh Nguyen Achong in a teal top, smiling warmly." />
+        <blockquote>“On the days you can’t find your own strength, you lean on the people who can be strong for you.”<cite>Mai Linh Nguyen Achong</cite></blockquote>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ─────────── The meetup ─────────── -->
+  <section class="section meetup ground-peach" aria-labelledby="meetup-title">
+    <div class="wrap meetup-grid">
+      <Print class="meetup-photo" src={zoom} tilt={-1.5} tape="pink" position="top" sizes="(min-width: 1000px) 34vw, 86vw"
+        alt="Ten women in a Zoom gallery view, smiling, one holding a Good Vibes Only neon sign." />
+      <div>
+        <h2 id="meetup-title">What happens at a <em>meetup</em></h2>
+        <p class="lede">Once a month we log on, check in and talk about whatever is on our minds. Some nights are full of laughter. Some are quiet. All of it is welcome.</p>
+        <ul class="truths">
+          <li><strong>It’s free.</strong> Always.</li>
+          <li><strong>Camera off is fine.</strong> You can just listen.</li>
+          <li><strong>Every gynecologic cancer.</strong> Any type, any stage, in treatment or after.</li>
+          <li><strong>Bring someone.</strong> Caregivers and loved ones are welcome too.</li>
+        </ul>
+        <div class="next-step">
+          <a class="btn" href="/join">Join a meetup</a>
+          <a class="link-arrow" href="/monthly-meetup">What to expect <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── Gatherings ─────────── -->
+  <section class="section gatherings ground-board" aria-labelledby="gather-title">
+    <div class="wrap">
+      <div class="gather-head">
+        <h2 id="gather-title">When we’re <em>together</em></h2>
+        <p class="lede">Around Orlando we show up for each other in person too: fitness fundraisers, give-back nights, ice cream.</p>
+      </div>
+
+      {next ? (
+        <article class="next-event">
+          <Print src={next.data.image} alt={next.data.imageAlt} tilt={-1.5} tape="teal" sizes="(min-width: 1000px) 30vw, 86vw" />
+          <div>
+            <p class="when">{formatDate(next.data.start, { weekday: 'long' })}{next.data.timeLabel && ` · ${next.data.timeLabel}`}</p>
+            <h3>{next.data.title}</h3>
+            <p>{next.data.summary}</p>
+            {eventHref(next) && <div class="next-step"><a class="btn" href={eventHref(next)}>{next.data.hasPage ? 'See the details' : (next.data.linkLabel ?? 'Learn more')}</a></div>}
+          </div>
+        </article>
+      ) : (
+        <div class="empty-invite">
+          <h3>The next gathering is <em>being planned</em></h3>
+          <p>New dates go up here and on Instagram first. Until then, the monthly meetup is the best way to meet everyone.</p>
+          <div class="next-step">
+            <a class="btn" href="/join">Join a meetup</a>
+            <a class="link-arrow" href="https://www.instagram.com/toteallysisters/" rel="noopener">Follow on Instagram <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      )}
+
+      {recent.length > 0 && (
+        <div class="recent">
+          <h3 class="recent-title">Recently</h3>
+          <ul class="recent-prints">
+            {recent.map((e, i) => (
+              <li>
+                <Print src={e.data.image} alt={e.data.imageAlt} tilt={[-2, 1.5, -1][i % 3]} tape={i % 2 ? 'pink' : 'teal'}
+                  tag={`${e.data.place.split(',')[0]} · ${formatShort(e.data.start)}`} sizes="(min-width: 1000px) 24vw, 80vw" />
+                <p>{e.data.title}</p>
+              </li>
+            ))}
+          </ul>
+          <div class="next-step"><a class="link-arrow" href="/events">All events <span aria-hidden="true">→</span></a></div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- ─────────── Close ─────────── -->
+  <section class="section close ground-pink" aria-labelledby="close-title">
+    <div class="wrap close-grid">
+      <div>
+        <h2 id="close-title">Come as you are. <em>We’ll save you a seat.</em></h2>
+        <p class="lede">Tell us a little about yourself and a sister will email you a hello and the link to the next meetup.</p>
+        <div class="next-step"><a class="btn" href="/join">Join a meetup</a></div>
+      </div>
+      <Print class="close-photo" src={lakeside} tilt={2} tape="teal" position="50% 40%" sizes="(min-width: 1000px) 32vw, 86vw"
+        alt="Three Toteally Sisters in teal shirts and Mickey ears by a lake, smiling." />
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ── Hero / board ── */
+  .hero { overflow: hidden; }
+  .hero-inner {
+    max-width: 1440px; margin-inline: auto;
+    padding: clamp(2.25rem, 1rem + 4vw, 4.5rem) var(--gutter) clamp(2.5rem, 2rem + 2vw, 3.5rem);
+    display: grid; gap: 2rem;
+    grid-template-areas: 'copy' 'board' 'steps';
+  }
+  .copy { grid-area: copy; }
+  .hero h1 { max-width: 11ch; }
+  .hero .lede { margin-top: 1.25rem; max-width: 34rem; }
+  .welcome { list-style: none; padding: 0; margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: 0.5rem; max-width: 34rem; }
+  .welcome li {
+    background: var(--paper); border: 1.5px solid var(--pink-strong); border-radius: var(--radius-pill);
+    padding: 0.35rem 0.85rem; font-size: 0.95rem; font-weight: 600;
+  }
+  .hero-steps { grid-area: steps; }
+  @media (min-width: 1000px) { .hero-inner :global(.hero-steps) { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-flow: row; } }
+
+  .board { grid-area: board; position: relative; display: grid; grid-template-columns: 1fr; gap: 0; padding-top: 0.5rem; }
+  .board :global(.print) { display: none; }
+  .board :global(.p-founders) { display: block; width: 82%; aspect-ratio: 4 / 3; margin-left: 4%; }
+  .invite-slot { position: relative; margin: -2.5rem 0 0 auto; width: min(92%, 22rem); z-index: 2; }
+
+  @media (min-width: 1000px) {
+    .hero-inner {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+      grid-template-areas: 'copy board' 'steps board';
+      grid-template-rows: auto 1fr;
+      column-gap: clamp(2rem, 4vw, 4rem);
+      min-height: calc(100svh - var(--header-h));
+      max-height: 980px;
+    }
+    .copy { align-self: center; }
+    .hero-steps { align-self: end; }
+    .board { display: block; min-height: 660px; }
+    .board :global(.print) { display: block; position: absolute; }
+    .board :global(.p-founders) { left: 0; top: 4%; width: 46%; aspect-ratio: 3 / 4; margin: 0; }
+    .board :global(.p-zoom) { right: 2%; top: 0; width: 40%; aspect-ratio: 4 / 5; }
+    .board :global(.p-fountain) { left: 2%; bottom: 3%; width: 40%; aspect-ratio: 1; }
+    .board :global(.p-teal) { right: 0; bottom: 0; width: 30%; aspect-ratio: 4 / 5; }
+    .invite-slot { position: absolute; left: 36%; top: 44%; margin: 0; width: min(46%, 22rem); }
+  }
+
+  /* ── Founders ── */
+  .founders-grid { display: grid; gap: 3rem 2.5rem; }
+  .founders-copy .lede { margin-top: 1.25rem; max-width: 34rem; }
+  .founder :global(.print) { aspect-ratio: 4 / 5; max-width: 22rem; }
+  .founder blockquote { margin-top: 1.5rem; font-family: var(--font-display); font-size: var(--step-2); line-height: 1.12; max-width: 22rem; }
+  .founder cite { display: block; margin-top: 0.75rem; font-family: var(--font-body); font-style: normal; font-weight: 700; font-size: 0.95rem; color: var(--ink-soft); }
+  @media (min-width: 1000px) {
+    .founders-grid { grid-template-columns: 1.1fr 1fr 1fr; align-items: start; }
+    .f-mai { margin-top: 5rem; }
+  }
+
+  /* ── Meetup ── */
+  .meetup-grid { display: grid; gap: 3rem; align-items: center; }
+  .meetup :global(.meetup-photo) { aspect-ratio: 4 / 5; max-width: 30rem; }
+  .meetup .lede { margin-top: 1.25rem; max-width: 36rem; }
+  .truths { list-style: none; padding: 0; margin-top: 1.75rem; display: grid; gap: 0.9rem; max-width: 36rem; }
+  .truths li { padding-left: 1.6rem; position: relative; }
+  .truths li::before {
+    content: ''; position: absolute; left: 0; top: 0.55em; width: 0.7rem; height: 0.7rem; border-radius: 50%;
+    background: var(--teal);
+  }
+  @media (min-width: 1000px) { .meetup-grid { grid-template-columns: 0.9fr 1.1fr; gap: 5rem; } }
+
+  /* ── Gatherings ── */
+  .gather-head .lede { margin-top: 1.25rem; max-width: 38rem; }
+  .next-event, .empty-invite { margin-top: 3rem; }
+  .next-event { display: grid; gap: 2rem; align-items: center; }
+  .next-event :global(.print) { aspect-ratio: 5 / 4; max-width: 30rem; }
+  .when { font-weight: 700; color: var(--teal-ink); }
+  .empty-invite {
+    background: var(--paper); padding: clamp(1.5rem, 1rem + 2vw, 2.5rem); max-width: 44rem;
+    box-shadow: var(--shadow-card); transform: rotate(-0.6deg);
+  }
+  .empty-invite p { margin-top: 0.85rem; max-width: 38rem; }
+  .recent { margin-top: clamp(3.5rem, 6vw, 5rem); }
+  .recent-title { font-size: var(--step-2); }
+  .recent-prints { list-style: none; padding: 0; margin-top: 2rem; display: grid; gap: 3rem 2.5rem; }
+  .recent-prints :global(.print) { aspect-ratio: 4 / 3; }
+  .recent-prints p { margin-top: 1.4rem; font-weight: 700; }
+  @media (min-width: 760px) { .recent-prints { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1000px) { .next-event { grid-template-columns: 1fr 1.1fr; gap: 4rem; } }
+
+  /* ── Close ── */
+  .close-grid { display: grid; gap: 3rem; align-items: center; }
+  .close .lede { margin-top: 1.25rem; max-width: 34rem; }
+  .close :global(.close-photo) { aspect-ratio: 4 / 3; max-width: 32rem; }
+  @media (min-width: 1000px) { .close-grid { grid-template-columns: 1.15fr 0.85fr; } }
+</style>

@@ -5,5 +5,35 @@
       "maxFindings": 5,
       "maxChars": 8000
     }
+  },
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "instrument serif",
+        "createdAt": "2026-11-11T00:05:39.786Z",
+        "reason": "brand commitment: incumbent Toteally Sisters palette/type kept per PRODUCT.md Brand Commitments (owner: keep the feel)"
+      },
+      {
+        "rule": "ai-color-palette",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/**"
+        ],
+        "createdAt": "2026-11-11T00:05:47.221Z",
+        "reason": "brand commitment: incumbent purple #673B98 and Instrument Serif italic accent kept per PRODUCT.md; scoped to decision sketches, re-judge on the real build"
+      },
+      {
+        "rule": "italic-serif-display",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/**"
+        ],
+        "createdAt": "2026-11-11T00:05:47.230Z",
+        "reason": "brand commitment: incumbent purple #673B98 and Instrument Serif italic accent kept per PRODUCT.md; scoped to decision sketches, re-judge on the real build"
+      }
+    ]
   }
 }

@@ -13,3 +13,9 @@ node_modules/
 
 # Impeccable per-developer overrides
 .impeccable/config.local.json
+
+# Build output
+dist/
+.astro/
+.impeccable/mocks/
+.impeccable/review/

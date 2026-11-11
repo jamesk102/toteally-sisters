@@ -1,0 +1,68 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Hide the phone join bar (e.g. on the Join page itself) */
+  hideJoinBar?: boolean;
+}
+const { title, description = site.description, hideJoinBar = false } = Astro.props;
+const fullTitle = title === site.name ? `${site.name}: you don't have to do this alone` : `${title} · ${site.name}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta name="theme-color" content="#120c14" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/satoshi-variable.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body>
+    <Header />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    {!hideJoinBar && (
+      <div class="join-bar on-dark" data-join-bar>
+        <a class="btn" href="/join">Join a meetup</a>
+      </div>
+    )}
+    <script>
+      // Phone join bar: appears once the page's own primary button has scrolled out of view.
+      const bar = document.querySelector<HTMLElement>('[data-join-bar]');
+      const anchor = document.querySelector('[data-primary-cta]');
+      if (bar) {
+        if (!anchor) bar.classList.add('show');
+        else new IntersectionObserver(([e]) => bar.classList.toggle('show', !e.isIntersecting && e.boundingClientRect.top < 0)).observe(anchor);
+      }
+    </script>
+    <style>
+      main:focus { outline: none; }
+      .join-bar {
+        position: fixed; inset: auto 0 0 0; z-index: 40;
+        padding: 0.75rem var(--gutter) calc(0.75rem + env(safe-area-inset-bottom));
+        background: rgb(18 12 20 / 0.94);
+        transform: translateY(110%);
+        transition: transform 320ms var(--ease-out);
+      }
+      .join-bar.show { transform: none; }
+      .join-bar .btn { width: 100%; }
+      @media (min-width: 1000px) { .join-bar { display: none; } }
+    </style>
+  </body>
+</html>

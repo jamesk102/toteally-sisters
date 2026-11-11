@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import Print from '../components/Print.astro';
+import founders from '../assets/photos/founders-dr-mckenzie.webp';
+import sherry from '../assets/photos/sherry.jpg';
+import mai from '../assets/photos/mai.png';
+---
+<Base title="Our Story" description="How survivors Sherry Baird and Mai Linh Nguyen Achong founded Toteally Sisters so no woman walks through gynecologic cancer alone.">
+  <PageHead
+    title="More than a <em>diagnosis</em>"
+    lede="When Sherry and Mai Linh crossed paths, they knew the community needed more than awareness. It needed connection, compassion and courage."
+    photo={founders}
+    photoAlt="Mai Linh, Dr. Nathalie McKenzie and Sherry standing together at an event, smiling."
+    position="50% 35%"
+  />
+
+  <article class="section story" aria-labelledby="sherry-title">
+    <div class="wrap story-grid">
+      <Print src={sherry} alt="Sherry Baird in a teal 5K shirt and heart-shaped teal sunglasses, smiling." tilt={-2} tape="pink" position="50% 20%" sizes="(min-width: 1000px) 28vw, 86vw" />
+      <div class="prose">
+        <h2 id="sherry-title">Sherry’s story: <em>turning pain into purpose</em></h2>
+        <p>For over 30 years, Sherry Baird silently endured the effects of endometriosis: painful periods, bloating and relentless discomfort. But in 2016, after a friend urged her to take her symptoms seriously, Sherry’s journey took a sudden and life-altering turn. Following a concerning scan, what began as a routine hysterectomy became something far more devastating: a diagnosis of stage 3C ovarian cancer.</p>
+        <p>Sherry’s battle would span multiple surgeries, intense chemotherapy, and even radiation as the cancer returned time and again. Yet, through each recurrence, she never wavered in her spirit. She found strength in her family, in her medical team, and in the promise of each new day.</p>
+        <blockquote>“Ovarian cancer has made me a better human.”</blockquote>
+        <p>Her mission now is to be a light for others navigating the darkest parts of their journey. “My goal is to help others move forward positively, with all the hills and valleys we encounter on this path.”</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="section story ground-pink" aria-labelledby="mai-title">
+    <div class="wrap story-grid flip">
+      <Print src={mai} alt="Mai Linh Nguyen Achong in a teal top, smiling warmly." tilt={2} tape="teal" position="50% 18%" sizes="(min-width: 1000px) 28vw, 86vw" />
+      <div class="prose">
+        <h2 id="mai-title">Mai Linh’s story: <em>finding strength through faith and community</em></h2>
+        <p>Mai Linh Nguyen Achong was just 26 when she received a diagnosis that would reshape her entire life: a rare granulosa cell tumor, a form of ovarian cancer. After early surgery, she hoped the worst was behind her, but her symptoms persisted, and her concerns were dismissed.</p>
+        <p>Years later, her worst fears returned. The cancer had spread to her liver, omentum and lymph nodes. This time, she met Dr. Nathalie McKenzie, a gynecologic oncologist who didn’t just treat her but vowed to fight alongside her. “She is my doctor, but I would also call her my friend,” Mai Linh says.</p>
+        <p>Over the next chapters, Mai Linh would endure ten major surgeries, multiple recurrences and life-threatening complications that left her in the ICU. But through it all, she was lifted by her husband, her faith and her unwavering support system.</p>
+        <blockquote>“It’s about finding your ‘why’ and building a community. On the days you can’t find your own strength, you lean on the people who can be strong for you.”</blockquote>
+      </div>
+    </div>
+  </article>
+
+  <section class="section together ground-peach" aria-labelledby="together-title">
+    <div class="wrap prose">
+      <h2 id="together-title">Together, they formed <em>Toteally Sisters</em></h2>
+      <p>Sherry and Mai Linh’s paths were different, but their mission is shared: to build a space of strength, solidarity and sisterhood for women navigating gynecologic cancers.</p>
+      <p>United by their personal battles and the deep need for community support, they co-founded Toteally Sisters, a group dedicated to survivors and thrivers. What began as monthly virtual meetups has grown into a network of women standing together in courage and connection.</p>
+      <p class="vision">Their vision is simple but profound: no woman should walk through this journey alone.</p>
+      <div class="close-card">
+        <p>Sherry and Mai Linh still gather everyone on Zoom every month. Come as you are.</p>
+        <div class="next-step">
+          <a class="btn" href="/join">Join a meetup</a>
+          <a class="link-arrow" href="/monthly-meetup">What to expect <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .story-grid { display: grid; gap: 3rem; align-items: start; }
+  .story-grid :global(.print) { aspect-ratio: 4 / 5; max-width: 26rem; }
+  .prose h2 { margin-top: 0; }
+  blockquote {
+    font-family: var(--font-display); font-size: var(--step-2); line-height: 1.12; color: var(--purple-deep);
+    padding-block: 0.5rem;
+  }
+  @media (min-width: 1000px) {
+    .story-grid { grid-template-columns: 0.8fr 1.2fr; gap: 5rem; }
+    .story-grid :global(.print) { position: sticky; top: calc(var(--header-h) + 2.5rem); }
+    .flip { grid-template-columns: 1.2fr 0.8fr; }
+    .flip :global(.print) { order: 2; }
+  }
+  .together h2 { margin-bottom: 0.5rem; }
+  .vision { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.12; }
+  .close-card { margin-top: 2.5rem; background: var(--paper); padding: clamp(1.5rem, 1rem + 2vw, 2.25rem); box-shadow: var(--shadow-card); transform: rotate(-0.6deg); }
+  .close-card p { font-size: var(--step-1); }
+  .close-card .next-step { margin-top: 1.5rem; }
+</style>
