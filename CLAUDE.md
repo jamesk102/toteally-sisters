@@ -2,7 +2,7 @@
 
 Rebuilding **toteallysisters.org**, currently on WordPress + Elementor, as a new site in this repo, deployed on **Vercel**. It is a survivor-founded community for women affected by gynecologic cancers.
 
-**Status (Nov 2026): a faithful clone of the current site, live at https://toteally-sisters.vercel.app.** Every push to `main` deploys to Vercel. The WordPress site stays live at toteallysisters.org until the owner switches the domain.
+**Status (Nov 2026): launched.** A faithful clone of the original WordPress site, live at **toteallysisters.org** on Vercel (DNS switched from Elementor; the WordPress site is no longer served). Every push to `main` deploys to production. URLs use trailing slashes, like the original (`trailingSlash: 'always'`).
 
 > **The owner's direction overrides everything below it:** keep the existing site essentially **verbatim**: same pages, same original URLs, same layout, same copy word for word, same photos at **full original resolution (never downscale or re-encode photos)**. Only subtle improvements: gentle fade-ins on scroll, the new mobile menu, accessibility (alt text, focus, labels) and speed. An earlier redesign ("the community board") was rejected and replaced; don't bring it back. Ask before changing any wording, layout or imagery.
 
@@ -58,16 +58,16 @@ Installed in `.claude/skills/`. When guidance conflicts, follow this order:
 ## Open items before launch
 
 - [ ] Upcoming events. Every event on the current site has passed (as of Nov 2026).
-- [ ] Email address that receives Get Involved submissions.
+- [x] Resend set up and tested (sender `support@toteallysisters.org`). Test mode: a submission using `delivered@resend.dev` as the email goes only to Resend's test inbox.
 - [ ] **Owner review of the drafted Privacy and Terms pages** (`src/pages/privacy-policy.astro`, `terms-of-use.astro`). They're written in plain language but aren't legal advice.
-- [ ] Resend account, a verified sending domain, and the Vercel env vars above.
+- [x] Domain pointed at Vercel.
 - [x] Alt text written for every content image.
 - [x] News video kept at full 1280×720 (`public/media/ovarian-cancer-awareness.mp4`).
 - [x] `main` branch created for Vercel production. Optional: make `main` the default branch in GitHub (Settings → General → Default branch).
 
 ## Next steps
 
-Set up Resend so the form emails the team, review the Privacy and Terms drafts, then point toteallysisters.org at Vercel.
+Owner to review the Privacy and Terms drafts. Rollback if ever needed: set the DNS A record `@` back to `162.159.137.9` and the `www` CNAME back to `oxfvlquw.elementor.cloud`.
 
 ## Conventions
 
