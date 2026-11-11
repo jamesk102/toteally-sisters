@@ -57,7 +57,7 @@ Installed in `.claude/skills/`. When guidance conflicts, follow this order:
 - **Security and cache headers** (CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy, plus caching for `/images`, `/fonts` and `/media`) are added to `.vercel/output/config.json` by `integrations/vercel-headers.mjs`, because `vercel.json` isn't applied with this adapter. Any new third-party script, font, embed or API must be allowed in its CSP. It also sends `X-Robots-Tag: noindex` on `toteally-sisters.vercel.app`.
 - **SEO:** each page passes `description` (and optionally `image`) to `Base.astro`, which renders the title, description, canonical, Open Graph and Twitter tags. Utility pages pass `noindex`. `src/pages/sitemap.xml.ts` lists the indexable pages (add new pages there), and `public/robots.txt` points to it.
 - **Cookies:** none. Vercel Web Analytics is cookie-free, so no consent banner is needed. Adding anything that sets cookies or tracks visitors (reCAPTCHA, Meta Pixel, Google Analytics, YouTube embeds) would require a consent banner and CSP changes.
-- **Pending design decision:** the Sister Support teal section (white on `#0DA7A7`, 2.95:1, and the teal "EMPOWER" label) fails WCAG AA contrast. It's the original brand styling, left unchanged until the owner approves a darker teal.
+- **Contrast fix (owner-approved):** the Sister Support "Core Values" section and its "EMPOWER" label use `--teal-dark` (`#0A8080`, 4.76:1 with white) instead of the brand teal `#0DA7A7`, which failed WCAG AA. Brand teal stays everywhere else.
 
 ## Open items before launch
 
