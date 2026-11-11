@@ -48,7 +48,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       const anchor = document.querySelector('[data-primary-cta]');
       if (bar) {
         if (!anchor) bar.classList.add('show');
-        else new IntersectionObserver(([e]) => bar.classList.toggle('show', !e.isIntersecting && e.boundingClientRect.top < 0)).observe(anchor);
+        else {
+          let queued = false;
+          const update = () => { queued = false; bar.classList.toggle('show', anchor.getBoundingClientRect().bottom < 0); };
+          addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+          update();
+        }
       }
     </script>
     <style>

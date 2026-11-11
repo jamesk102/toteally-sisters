@@ -6,6 +6,7 @@ export default defineConfig({
   site: 'https://toteallysisters.org',
   adapter: vercel(),
   trailingSlash: 'ignore',
+  devToolbar: { enabled: false },
   // Old WordPress URLs keep working.
   redirects: {
     '/sister-support': '/monthly-meetup',

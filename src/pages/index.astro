@@ -27,10 +27,10 @@ const recent = past.slice(0, 3);
           A free community for women facing gynecologic cancer, and the people who love them. Founded by two survivors.{' '}
           <strong>We meet on Zoom every month.</strong>
         </p>
-        <ul class="welcome" aria-label="Everyone is welcome">
-          <li>Ovarian</li><li>Uterine</li><li>Cervical</li><li>Vulvar</li><li>In treatment or after</li><li>Caregivers</li>
-        </ul>
       </div>
+      <ul class="welcome" aria-label="Everyone is welcome">
+        <li>Ovarian</li><li>Uterine</li><li>Cervical</li><li>Vulvar</li><li>In treatment or after</li><li>Caregivers</li>
+      </ul>
 
       <div class="board">
         <Print class="p-founders" src={founders} tilt={-3} tape="teal" settle={0} loading="eager" position="50% 30%"
@@ -159,12 +159,12 @@ const recent = past.slice(0, 3);
     max-width: 1440px; margin-inline: auto;
     padding: clamp(2.25rem, 1rem + 4vw, 4.5rem) var(--gutter) clamp(2.5rem, 2rem + 2vw, 3.5rem);
     display: grid; gap: 2rem;
-    grid-template-areas: 'copy' 'board' 'steps';
+    grid-template-areas: 'copy' 'board' 'welcome' 'steps';
   }
   .copy { grid-area: copy; }
   .hero h1 { max-width: 11ch; }
   .hero .lede { margin-top: 1.25rem; max-width: 34rem; }
-  .welcome { list-style: none; padding: 0; margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: 0.5rem; max-width: 34rem; }
+  .welcome { grid-area: welcome; list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; max-width: 34rem; }
   .welcome li {
     background: var(--paper); border: 1.5px solid var(--pink-strong); border-radius: var(--radius-pill);
     padding: 0.35rem 0.85rem; font-size: 0.95rem; font-weight: 600;
@@ -180,13 +180,14 @@ const recent = past.slice(0, 3);
   @media (min-width: 1000px) {
     .hero-inner {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
-      grid-template-areas: 'copy board' 'steps board';
-      grid-template-rows: auto 1fr;
+      grid-template-areas: 'copy board' 'welcome board' 'steps board';
+      grid-template-rows: auto auto 1fr;
       column-gap: clamp(2rem, 4vw, 4rem);
       min-height: calc(100svh - var(--header-h));
       max-height: 980px;
     }
-    .copy { align-self: center; }
+    .copy { align-self: end; }
+    .welcome { align-self: start; margin-top: -0.5rem; }
     .hero-steps { align-self: end; }
     .board { display: block; min-height: 660px; }
     .board :global(.print) { display: block; position: absolute; }
