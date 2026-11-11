@@ -1,4 +1,5 @@
 ---
+import Arrow from './Arrow.astro';
 import logo from '../assets/brand/logo.svg';
 import { nav, site } from '../data/site';
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
@@ -16,7 +17,7 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + '/')
         {nav.map((item) => (
           <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
         ))}
-        <li><a class="donate" href={site.ocraDonate} rel="noopener">Donate via OCRA<span aria-hidden="true"> ↗</span><span class="visually-hidden"> (opens OCRA's site)</span></a></li>
+        <li><a class="donate" href={site.ocraDonate} rel="noopener">Donate via OCRA <Arrow dir="out" /><span class="visually-hidden"> (opens OCRA's site)</span></a></li>
       </ul>
       <a class="btn join" href="/join" aria-current={isCurrent('/join') ? 'page' : undefined}>Join a meetup</a>
     </nav>
@@ -37,7 +38,7 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + '/')
         ))}
         <li><a href="/in-the-news">In the News</a></li>
       </ul>
-      <a class="donate" href={site.ocraDonate} rel="noopener">Donate via OCRA<span aria-hidden="true"> ↗</span></a>
+      <a class="donate" href={site.ocraDonate} rel="noopener">Donate via OCRA <Arrow dir="out" /></a>
     </nav>
   </div>
 </header>

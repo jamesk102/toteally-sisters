@@ -1,4 +1,5 @@
 ---
+import Arrow from '../../components/Arrow.astro';
 import Base from '../../layouts/Base.astro';
 import PageHead from '../../components/PageHead.astro';
 import MeetupInvite from '../../components/MeetupInvite.astro';
@@ -34,7 +35,7 @@ const { upcoming, past } = await getEvents();
         <p>New dates go up here and on Instagram first. Until then, come say hello at the monthly meetup.</p>
         <div class="next-step">
           <a class="btn" href="/join">Join a meetup</a>
-          <a class="link-arrow" href={site.instagram} rel="noopener">Follow on Instagram <span aria-hidden="true">↗</span></a>
+          <a class="link-arrow" href={site.instagram} rel="noopener">Follow on Instagram <Arrow dir="out" /></a>
         </div>
       </div>
     </div>

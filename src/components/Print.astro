@@ -62,8 +62,8 @@ const {
   /* The one authored moment: prints settle onto the board once. */
   @media (prefers-reduced-motion: no-preference) {
     .settle {
-      animation: settle 620ms var(--ease-settle) both;
-      animation-delay: calc(var(--i) * 70ms + 80ms);
+      animation: settle 420ms var(--ease-settle) both;
+      animation-delay: calc(var(--i) * 50ms + 60ms);
     }
     @keyframes settle {
       from { opacity: 0; transform: translateY(-14px) rotate(calc(var(--tilt) - 4deg)) scale(1.03); }

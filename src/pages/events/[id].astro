@@ -1,4 +1,5 @@
 ---
+import Arrow from '../../components/Arrow.astro';
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Print from '../../components/Print.astro';
@@ -24,7 +25,7 @@ const isOfo = event.id === 'ovarian-fitness-orlando';
   <section class="head ground-board">
     <div class="wrap inner">
       <div>
-        <p class="crumb"><a href="/events">← All events</a></p>
+        <p class="crumb"><a href="/events"><Arrow dir="left" /> All events</a></p>
         <h1>{event.data.title}</h1>
         <p class="when">{formatDate(event.data.start, { weekday: 'long' })} · {event.data.place}</p>
         {isPast && <p class="past-note">This event has passed. Thank you to everyone who came, moved and gave.</p>}
@@ -33,12 +34,12 @@ const isOfo = event.id === 'ovarian-fitness-orlando';
           {isPast ? (
             <>
               <a class="btn" href="/join" data-primary-cta="true">Join a meetup</a>
-              <a class="link-arrow" href={site.ocraDonate} rel="noopener">Donate via OCRA <span aria-hidden="true">↗</span></a>
+              <a class="link-arrow" href={site.ocraDonate} rel="noopener">Donate via OCRA <Arrow dir="out" /></a>
             </>
           ) : (
             <>
-              <a class="btn" href={`${site.ocraHome}signup`} rel="noopener" data-primary-cta="true">Register on OCRA’s site <span aria-hidden="true">↗</span></a>
-              <a class="link-arrow" href={site.ocraDonate} rel="noopener">Donate via OCRA <span aria-hidden="true">↗</span></a>
+              <a class="btn" href={`${site.ocraHome}signup`} rel="noopener" data-primary-cta="true">Register on OCRA’s site <Arrow dir="out" /></a>
+              <a class="link-arrow" href={site.ocraDonate} rel="noopener">Donate via OCRA <Arrow dir="out" /></a>
             </>
           )}
         </div>
@@ -66,7 +67,7 @@ const isOfo = event.id === 'ovarian-fitness-orlando';
         <p class="note">Ovarian Fitness Orlando is run by the Ovarian Cancer Research Alliance. Registration and donations happen on OCRA’s site.</p>
         <div class="next-step">
           <a class="btn" href="/join">Join a meetup</a>
-          <a class="link-arrow" href="/events">All events <span aria-hidden="true">→</span></a>
+          <a class="link-arrow" href="/events">All events <Arrow /></a>
         </div>
       </div>
     </section>

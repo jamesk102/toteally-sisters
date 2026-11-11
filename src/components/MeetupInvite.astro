@@ -54,7 +54,7 @@ const upcoming = next && next.getTime() > Date.now() ? next : null;
   }
   .more:hover { text-decoration-color: var(--purple); color: var(--purple-deep); }
   @media (prefers-reduced-motion: no-preference) {
-    .settle { animation: drop 640ms var(--ease-settle) both; animation-delay: calc(var(--i) * 70ms + 80ms); }
+    .settle { animation: drop 440ms var(--ease-settle) both; animation-delay: calc(var(--i) * 50ms + 60ms); }
     @keyframes drop {
       from { opacity: 0; transform: translateY(-16px) rotate(-4deg); }
       to { opacity: 1; transform: rotate(-1.2deg); }

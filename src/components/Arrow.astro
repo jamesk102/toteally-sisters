@@ -1,0 +1,16 @@
+---
+/** Drawn arrow icon, same 1.8 stroke as the site's other icons. */
+interface Props { dir?: 'right' | 'left' | 'out' }
+const { dir = 'right' } = Astro.props;
+const paths = {
+  right: 'M5 12h14M13 6l6 6-6 6',
+  left: 'M19 12H5M11 6l-6 6 6 6',
+  out: 'M7 17L17 7M9 7h8v8',
+};
+---
+<svg class="arrow" aria-hidden="true" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d={paths[dir]} /></svg>
+
+<style>
+  .arrow { display: inline-block; flex: none; width: 1em; height: 1em; vertical-align: -0.125em; transition: transform var(--dur) var(--ease-out); }
+  :global(a:hover) > .arrow { transform: translateX(2px); }
+</style>

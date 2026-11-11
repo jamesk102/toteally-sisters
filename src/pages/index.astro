@@ -1,4 +1,5 @@
 ---
+import Arrow from '../components/Arrow.astro';
 import Base from '../layouts/Base.astro';
 import Print from '../components/Print.astro';
 import MeetupInvite from '../components/MeetupInvite.astro';
@@ -54,7 +55,7 @@ const recent = past.slice(0, 3);
       <div class="founders-copy">
         <h2 id="founders-title">Started by two women who’ve been there</h2>
         <p class="lede">Sherry Baird and Mai Linh Nguyen Achong met as patients. They knew women like them needed more than awareness. They needed each other.</p>
-        <div class="next-step"><a class="link-arrow" href="/our-story">Read their story <span aria-hidden="true">→</span></a></div>
+        <div class="next-step"><a class="link-arrow" href="/our-story">Read their story <Arrow /></a></div>
       </div>
       <figure class="founder f-sherry">
         <Print src={sherry} tilt={-2} tape="pink" position="50% 20%" sizes="(min-width: 1000px) 22vw, 70vw"
@@ -85,7 +86,7 @@ const recent = past.slice(0, 3);
         </ul>
         <div class="next-step">
           <a class="btn" href="/join">Join a meetup</a>
-          <a class="link-arrow" href="/monthly-meetup">What to expect <span aria-hidden="true">→</span></a>
+          <a class="link-arrow" href="/monthly-meetup">What to expect <Arrow /></a>
         </div>
       </div>
     </div>
@@ -103,8 +104,8 @@ const recent = past.slice(0, 3);
         <article class="next-event">
           <Print src={next.data.image} alt={next.data.imageAlt} tilt={-1.5} tape="teal" sizes="(min-width: 1000px) 30vw, 86vw" />
           <div>
-            <p class="when">{formatDate(next.data.start, { weekday: 'long' })}{next.data.timeLabel && ` · ${next.data.timeLabel}`}</p>
             <h3>{next.data.title}</h3>
+            <p class="when">{formatDate(next.data.start, { weekday: 'long' })}{next.data.timeLabel && ` · ${next.data.timeLabel}`}</p>
             <p>{next.data.summary}</p>
             {eventHref(next) && <div class="next-step"><a class="btn" href={eventHref(next)}>{next.data.hasPage ? 'See the details' : (next.data.linkLabel ?? 'Learn more')}</a></div>}
           </div>
@@ -115,7 +116,7 @@ const recent = past.slice(0, 3);
           <p>New dates go up here and on Instagram first. Until then, the monthly meetup is the best way to meet everyone.</p>
           <div class="next-step">
             <a class="btn" href="/join">Join a meetup</a>
-            <a class="link-arrow" href="https://www.instagram.com/toteallysisters/" rel="noopener">Follow on Instagram <span aria-hidden="true">↗</span></a>
+            <a class="link-arrow" href="https://www.instagram.com/toteallysisters/" rel="noopener">Follow on Instagram <Arrow dir="out" /></a>
           </div>
         </div>
       )}
@@ -132,7 +133,7 @@ const recent = past.slice(0, 3);
               </li>
             ))}
           </ul>
-          <div class="next-step"><a class="link-arrow" href="/events">All events <span aria-hidden="true">→</span></a></div>
+          <div class="next-step"><a class="link-arrow" href="/events">All events <Arrow /></a></div>
         </div>
       )}
     </div>
@@ -157,8 +158,8 @@ const recent = past.slice(0, 3);
   .hero { overflow: hidden; }
   .hero-inner {
     max-width: 1440px; margin-inline: auto;
-    padding: clamp(2.25rem, 1rem + 4vw, 4.5rem) var(--gutter) clamp(2.5rem, 2rem + 2vw, 3.5rem);
-    display: grid; gap: 2rem;
+    padding: clamp(1.5rem, 0.5rem + 4vw, 4.5rem) var(--gutter) clamp(2.5rem, 2rem + 2vw, 3.5rem);
+    display: grid; gap: 1.5rem;
     grid-template-areas: 'copy' 'board' 'welcome' 'steps';
   }
   .copy { grid-area: copy; }
@@ -174,8 +175,8 @@ const recent = past.slice(0, 3);
 
   .board { grid-area: board; position: relative; display: grid; grid-template-columns: 1fr; gap: 0; padding-top: 0.5rem; }
   .board :global(.print) { display: none; }
-  .board :global(.p-founders) { display: block; width: 82%; aspect-ratio: 4 / 3; margin-left: 4%; }
-  .invite-slot { position: relative; margin: -2.5rem 0 0 auto; width: min(92%, 22rem); z-index: 2; }
+  .board :global(.p-founders) { display: block; width: 62%; aspect-ratio: 4 / 3; margin-left: 2%; }
+  .invite-slot { position: relative; margin: -4.5rem 0 0 auto; width: min(88%, 22rem); z-index: 2; }
 
   @media (min-width: 1000px) {
     .hero-inner {
@@ -226,7 +227,7 @@ const recent = past.slice(0, 3);
   .next-event, .empty-invite { margin-top: 3rem; }
   .next-event { display: grid; gap: 2rem; align-items: center; }
   .next-event :global(.print) { aspect-ratio: 5 / 4; max-width: 30rem; }
-  .when { font-weight: 700; color: var(--teal-ink); }
+  .when { margin-block: 0.6rem 0.75rem; font-weight: 700; color: var(--teal-ink); }
   .empty-invite {
     background: var(--paper); padding: clamp(1.5rem, 1rem + 2vw, 2.5rem); max-width: 44rem;
     box-shadow: var(--shadow-card); transform: rotate(-0.6deg);

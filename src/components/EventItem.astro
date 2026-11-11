@@ -1,4 +1,5 @@
 ---
+import Arrow from './Arrow.astro';
 import Print from './Print.astro';
 import { formatDate, formatShort, eventHref, endOf, type Event } from '../lib/events';
 interface Props { event: Event; index?: number; past?: boolean }
@@ -9,15 +10,14 @@ const href = eventHref(e);
   <Print src={e.data.image} alt={e.data.imageAlt} tilt={[-1.5, 1.5, -1][index % 3]} tape={index % 2 ? 'pink' : 'teal'}
     tag={`${e.data.place.split(',')[0]} · ${formatShort(e.data.start)}`} sizes="(min-width: 1000px) 26vw, 86vw" />
   <div class="body">
-    <p class="when">{formatDate(e.data.start, { weekday: 'long' })}{e.data.timeLabel && ` · ${e.data.timeLabel}`}</p>
     <h3>{href && e.data.hasPage ? <a href={href}>{e.data.title}</a> : e.data.title}</h3>
-    <p class="place">{e.data.place}</p>
+    <p class="when">{formatDate(e.data.start, { weekday: 'long' })}{e.data.timeLabel && ` · ${e.data.timeLabel}`}<span class="place"> · {e.data.place}</span></p>
     <p>{e.data.summary}</p>
     {e.data.benefitsOcra && <p class="ocra">Proceeds went to the Ovarian Cancer Research Alliance.</p>}
     {href && (
       <a class="link-arrow" href={href} rel={e.data.hasPage ? undefined : 'noopener'}>
         {e.data.hasPage ? (past ? 'Look back at the day' : 'See the details') : (e.data.linkLabel ?? 'Learn more')}
-        <span aria-hidden="true">{e.data.hasPage ? '→' : '↗'}</span>
+        <Arrow dir={e.data.hasPage ? 'right' : 'out'} />
       </a>
     )}
   </div>
@@ -26,12 +26,11 @@ const href = eventHref(e);
 <style>
   .event { display: grid; gap: 1.75rem; align-items: center; }
   .event :global(.print) { aspect-ratio: 4 / 3; max-width: 30rem; }
-  .when { font-weight: 700; color: var(--teal-ink); }
-  h3 { margin-top: 0.4rem; }
+  .when { margin-top: 0.6rem; margin-bottom: 0.75rem; font-weight: 700; color: var(--teal-ink); }
   h3 a { text-decoration: none; }
   h3 a:hover { text-decoration: underline; text-decoration-color: var(--purple); }
-  .place { color: var(--ink-soft); font-weight: 600; margin-bottom: 0.75rem; }
-  .body > p:not(.when):not(.place) { max-width: 40rem; }
+  .place { color: var(--ink-soft); font-weight: 600; }
+  .body > p:not(.when) { max-width: 40rem; }
   .ocra { margin-top: 0.6rem; font-size: var(--step--1); color: var(--ink-soft); }
   .link-arrow { margin-top: 1rem; }
   @media (min-width: 900px) { .event { grid-template-columns: 0.9fr 1.1fr; gap: 3.5rem; } }
