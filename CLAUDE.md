@@ -2,11 +2,12 @@
 
 Rebuilding **toteallysisters.org**, currently on WordPress + Elementor, as a new site in this repo, deployed on **Vercel**. It is a survivor-founded community for women affected by gynecologic cancers.
 
-**Status:** pre-build. The source has been captured, skills are installed, and PRODUCT.md is written. Do not start building until the owner says go.
+**Status:** built (Nov 2026). The Astro site is complete, passed Impeccable's finish review (verdict: ship after one fix round), and is waiting on the owner's content items below and on the Vercel connection. The current WordPress site stays live until the owner approves the switch.
 
 ## Read first
 
 - `PRODUCT.md`: audience, purpose, the OCRA partnership, voice, accessibility, and what not to fabricate. **This is the top authority for every design decision.**
+- `DESIGN.md` (once written) and `.impeccable/surfaces/src-pages-index-astro.md` (the home page direction contract: "the community board").
 - `_source/README.md`: snapshot of the current site (media, fonts, brand colors, page inventory, links). Page copy is in `_source/content/text/`, and all media is indexed in `_source/media/INDEX.md`.
 
 ## Decisions already made
@@ -21,7 +22,7 @@ Rebuilding **toteallysisters.org**, currently on WordPress + Elementor, as a new
 The full critique is in `.impeccable/critique/`.
 
 - **The monthly Zoom meetup is the centerpiece.** Sister Support becomes a "Monthly Meetup / What to expect" page: when, how long, cameras optional, caregivers welcome, and answers to first-timer questions. Home and every "Join" button lead there. Say outright that **all gynecologic cancers are welcome**, not only ovarian.
-- **Navigation:** "Join a meetup" (Get Involved) is the main button everywhere, including the phone menu, and opens in the same tab. **Donate becomes a smaller text link labeled "Donate via OCRA ↗"** and must never appear twice.
+- **Navigation:** "Join a meetup" (Get Involved) is the main button everywhere, including the phone menu, and opens in the same tab. **Donate becomes a smaller text link labeled "Donate via OCRA (with an out-arrow icon)"** and must never appear twice.
 - **Intake form:** keep all 11 fields, made gentler. No pre-selected answers, add "Prefer not to say", autocomplete attributes, a visible focus ring, plain-language inline errors, a privacy and "what happens next" note above the button, and a warm confirmation after sending.
 - **Scope: fix everything** the critique found while rebuilding, keeping the same look. Copy changes outside Our Story go to the owner for approval.
 - **Events:** past events go into an automatic "Past events" section. Show a friendly empty state when nothing is scheduled. Home features the next upcoming event, falling back to the meetup.
@@ -50,19 +51,31 @@ Installed in `.claude/skills/`. When guidance conflicts, follow this order:
 - **Cloud environment:** use the **toteally-sisters** environment. It allows `toteallysisters.org`, `impeccable.style` and Vercel.
 - Impeccable's anonymous telemetry is **on** (the owner hasn't decided). Turn it off with `npx impeccable telemetry off`.
 
+## How the site works
+
+- `npm run dev` (port 4321), `npm run build`, `npx astro check`. Node 22.23+.
+- **Site facts** live in `src/data/site.ts`: social links, OCRA links, and the **meetup schedule** (`meetup.schedule`, `time`, `length`, `next`). While those are null, pages say the date and link are emailed after joining.
+- **Events** are Markdown files in `src/content/events/`. Each has `start`/`end`, place, summary, image and alt text. Past events move to "Past events" automatically (at build time, and re-checked in the browser). `hasPage: true` gives an event its own page at `/events/<file-name>`.
+- **Join form** (`src/pages/join/index.astro`, fields in `src/lib/join-form.ts`) posts to `src/pages/api/join.ts`, which emails the team via **Resend**. Vercel environment variables: `RESEND_API_KEY` (secret), `JOIN_TO_EMAIL` (recipient(s), comma-separated), `JOIN_FROM_EMAIL` (sender on a domain verified in Resend). Without them, the form shows a friendly "didn't send" message that points to Instagram. Spam protection: honeypot field plus a minimum time on page.
+- Old WordPress URLs redirect (`astro.config.mjs`).
+- Photos live in `src/assets/photos/` and are optimized by Astro. Each one has its origin embedded (`impeccable embed-prompt --scan src/assets public/media` should report 0 missing). Copy new photos from `_source/media/` and embed their origin.
+
 ## Open items before launch
 
 - [ ] Upcoming events. Every event on the current site has passed (as of Nov 2026).
 - [ ] Monthly meetup details: usual day, time, length, platform link policy, and who hosts.
 - [ ] Email address that receives Get Involved submissions.
-- [ ] Privacy Policy and Terms of Use text. Both are empty on the current site, and the form collects health information.
-- [ ] Alt text for the images. Most have none, so write it.
-- [ ] Compress or externally host the 49 MB awareness video (`_source/media/2025/05/ovarianCancerAwareness.mp4`).
+- [ ] **Owner review of the drafted Privacy and Terms pages** (`src/pages/privacy.astro`, `terms.astro`). They're written in plain language but aren't legal advice.
+- [ ] Owner approval of the new copy outside Our Story (home sections, Monthly Meetup FAQs, Events, Join).
+- [ ] Founders' personal social links were dropped. Confirm that's intended.
+- [ ] Resend account, a verified sending domain, and the Vercel env vars above.
+- [x] Alt text written for every content image.
+- [x] Awareness video compressed to 12 MB (`public/media/wesh-ovarian-awareness.mp4`).
 - [ ] Create a `main` branch for Vercel production. Right now `claude/peaceful-lovelace-oaug59` is the only (and default) branch.
 
-## Next step when the owner says go
+## Next steps
 
-Run `/impeccable critique` on the live site to define what "better" means, then `/impeccable document` to record the current visual system, then build.
+Owner connects Vercel to `main`, then preview, then fill in the open items above, then point the domain at Vercel.
 
 ## Conventions
 
