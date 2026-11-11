@@ -59,7 +59,7 @@ Installed in `.claude/skills/`. When guidance conflicts, follow this order:
 
 - [ ] Upcoming events. Every event on the current site has passed (as of Nov 2026).
 - [x] Resend set up and tested (sender `support@toteallysisters.org`). Test mode: a submission using `delivered@resend.dev` as the email goes only to Resend's test inbox.
-- [ ] **Owner review of the drafted Privacy and Terms pages** (`src/pages/privacy-policy.astro`, `terms-of-use.astro`). They're written in plain language but aren't legal advice.
+- [x] Privacy Policy and Terms of Use: short, broad, website-only versions (owner asked to keep them general, not about meetups or services). Not legal advice.
 - [x] Domain pointed at Vercel.
 - [x] Alt text written for every content image.
 - [x] News video kept at full 1280×720 (`public/media/ovarian-cancer-awareness.mp4`).
@@ -67,7 +67,7 @@ Installed in `.claude/skills/`. When guidance conflicts, follow this order:
 
 ## Next steps
 
-Owner to review the Privacy and Terms drafts. Rollback if ever needed: set the DNS A record `@` back to `162.159.137.9` and the `www` CNAME back to `oxfvlquw.elementor.cloud`.
+Rollback if ever needed: set the DNS A record `@` back to `162.159.137.9` and the `www` CNAME back to `oxfvlquw.elementor.cloud`.
 
 ## Conventions
 
