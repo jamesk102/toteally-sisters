@@ -1,0 +1,472 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-11T00:40:00Z",
+  "title": "Design System: Toteally Sisters",
+  "extensions": {
+    "colorMeta": {
+      "purple": {
+        "role": "primary",
+        "displayName": "Sisterhood Purple",
+        "canonical": "#673b98",
+        "tonalRamp": [
+          "oklch(15.0% 0.068 302.7)",
+          "oklch(26.4% 0.099 302.7)",
+          "oklch(37.9% 0.130 302.7)",
+          "oklch(49.3% 0.148 302.7)",
+          "oklch(60.7% 0.148 302.7)",
+          "oklch(72.1% 0.130 302.7)",
+          "oklch(83.6% 0.099 302.7)",
+          "oklch(95.0% 0.068 302.7)"
+        ]
+      },
+      "purple-deep": {
+        "role": "primary",
+        "displayName": "Deep Plum Purple",
+        "canonical": "#4f2b78",
+        "tonalRamp": [
+          "oklch(15.0% 0.058 302.2)",
+          "oklch(26.4% 0.085 302.2)",
+          "oklch(37.9% 0.112 302.2)",
+          "oklch(49.3% 0.127 302.2)",
+          "oklch(60.7% 0.127 302.2)",
+          "oklch(72.1% 0.112 302.2)",
+          "oklch(83.6% 0.085 302.2)",
+          "oklch(95.0% 0.058 302.2)"
+        ]
+      },
+      "pink": {
+        "role": "secondary",
+        "displayName": "Ribbon Board Pink",
+        "canonical": "#f6ddee",
+        "tonalRamp": [
+          "oklch(15.0% 0.016 337.4)",
+          "oklch(26.4% 0.024 337.4)",
+          "oklch(37.9% 0.031 337.4)",
+          "oklch(49.3% 0.035 337.4)",
+          "oklch(60.7% 0.035 337.4)",
+          "oklch(72.1% 0.031 337.4)",
+          "oklch(83.6% 0.024 337.4)",
+          "oklch(95.0% 0.016 337.4)"
+        ]
+      },
+      "pink-strong": {
+        "role": "secondary",
+        "displayName": "Brand Pink",
+        "canonical": "#ebbad9",
+        "tonalRamp": [
+          "oklch(15.0% 0.032 340.4)",
+          "oklch(26.4% 0.046 340.4)",
+          "oklch(37.9% 0.061 340.4)",
+          "oklch(49.3% 0.069 340.4)",
+          "oklch(60.7% 0.069 340.4)",
+          "oklch(72.1% 0.061 340.4)",
+          "oklch(83.6% 0.046 340.4)",
+          "oklch(95.0% 0.032 340.4)"
+        ]
+      },
+      "peach": {
+        "role": "secondary",
+        "displayName": "Invitation Peach",
+        "canonical": "#ffdcbc",
+        "tonalRamp": [
+          "oklch(15.0% 0.026 64.5)",
+          "oklch(26.4% 0.038 64.5)",
+          "oklch(37.9% 0.051 64.5)",
+          "oklch(49.3% 0.057 64.5)",
+          "oklch(60.7% 0.057 64.5)",
+          "oklch(72.1% 0.051 64.5)",
+          "oklch(83.6% 0.038 64.5)",
+          "oklch(95.0% 0.026 64.5)"
+        ]
+      },
+      "teal": {
+        "role": "tertiary",
+        "displayName": "Ribbon Teal",
+        "canonical": "#0da7a7",
+        "tonalRamp": [
+          "oklch(15.0% 0.051 194.8)",
+          "oklch(26.4% 0.074 194.8)",
+          "oklch(37.9% 0.098 194.8)",
+          "oklch(49.3% 0.111 194.8)",
+          "oklch(60.7% 0.111 194.8)",
+          "oklch(72.1% 0.098 194.8)",
+          "oklch(83.6% 0.074 194.8)",
+          "oklch(95.0% 0.051 194.8)"
+        ]
+      },
+      "teal-ink": {
+        "role": "tertiary",
+        "displayName": "Deep Teal Ink",
+        "canonical": "#05605f",
+        "tonalRamp": [
+          "oklch(15.0% 0.034 193.5)",
+          "oklch(26.4% 0.050 193.5)",
+          "oklch(37.9% 0.066 193.5)",
+          "oklch(49.3% 0.074 193.5)",
+          "oklch(60.7% 0.074 193.5)",
+          "oklch(72.1% 0.066 193.5)",
+          "oklch(83.6% 0.050 193.5)",
+          "oklch(95.0% 0.034 193.5)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Plum-Black Ink",
+        "canonical": "#1d1320",
+        "tonalRamp": [
+          "oklch(15.0% 0.013 318.3)",
+          "oklch(26.4% 0.020 318.3)",
+          "oklch(37.9% 0.026 318.3)",
+          "oklch(49.3% 0.029 318.3)",
+          "oklch(60.7% 0.029 318.3)",
+          "oklch(72.1% 0.026 318.3)",
+          "oklch(83.6% 0.020 318.3)",
+          "oklch(95.0% 0.013 318.3)"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Soft Plum Ink",
+        "canonical": "#4a3b4e",
+        "tonalRamp": [
+          "oklch(15.0% 0.017 319.1)",
+          "oklch(26.4% 0.025 319.1)",
+          "oklch(37.9% 0.033 319.1)",
+          "oklch(49.3% 0.037 319.1)",
+          "oklch(60.7% 0.037 319.1)",
+          "oklch(72.1% 0.033 319.1)",
+          "oklch(83.6% 0.025 319.1)",
+          "oklch(95.0% 0.017 319.1)"
+        ]
+      },
+      "night": {
+        "role": "neutral",
+        "displayName": "Night",
+        "canonical": "#120c14",
+        "tonalRamp": [
+          "oklch(15.0% 0.019 317.6)",
+          "oklch(26.4% 0.019 317.6)",
+          "oklch(37.9% 0.019 317.6)",
+          "oklch(49.3% 0.019 317.6)",
+          "oklch(60.7% 0.019 317.6)",
+          "oklch(72.1% 0.019 317.6)",
+          "oklch(83.6% 0.019 317.6)",
+          "oklch(95.0% 0.019 317.6)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 89.9)",
+          "oklch(26.4% 0.000 89.9)",
+          "oklch(37.9% 0.000 89.9)",
+          "oklch(49.3% 0.000 89.9)",
+          "oklch(60.7% 0.000 89.9)",
+          "oklch(72.1% 0.000 89.9)",
+          "oklch(83.6% 0.000 89.9)",
+          "oklch(95.0% 0.000 89.9)"
+        ]
+      },
+      "error": {
+        "role": "neutral",
+        "displayName": "Error Red",
+        "canonical": "#b3261e",
+        "tonalRamp": [
+          "oklch(15.0% 0.082 28.7)",
+          "oklch(26.4% 0.119 28.7)",
+          "oklch(37.9% 0.157 28.7)",
+          "oklch(49.3% 0.178 28.7)",
+          "oklch(60.7% 0.178 28.7)",
+          "oklch(72.1% 0.157 28.7)",
+          "oklch(83.6% 0.119 28.7)",
+          "oklch(95.0% 0.082 28.7)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "rgb(29 19 32 / 0.14)",
+        "tonalRamp": [
+          "rgb(29 19 32 / 0.04)",
+          "rgb(29 19 32 / 0.08)",
+          "rgb(29 19 32 / 0.14)",
+          "rgb(29 19 32 / 0.22)",
+          "rgb(29 19 32 / 0.32)",
+          "rgb(29 19 32 / 0.45)",
+          "rgb(29 19 32 / 0.6)",
+          "rgb(29 19 32 / 0.8)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "One H1 per page, two or three lines, one italic purple phrase allowed."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section H2s."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "H3s, event titles, founder pull quotes."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Paragraph under every H1 and H2."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All running text, 36rem measure."
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Hints, legal lines, OCRA notes."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase desktop header nav and header join pill only."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Purple 1-2-3 join step numbers."
+      }
+    },
+    "shadows": [
+      {
+        "name": "print",
+        "value": "0 1px 2px rgb(18 12 20 / 0.12), 0 16px 32px -14px rgb(18 12 20 / 0.38)",
+        "purpose": "Every photo print pinned to the board."
+      },
+      {
+        "name": "card",
+        "value": "0 2px 4px rgb(18 12 20 / 0.08), 0 22px 40px -18px rgb(18 12 20 / 0.42)",
+        "purpose": "Invitation card, empty-gathering card, join form card."
+      },
+      {
+        "name": "ticket",
+        "value": "0 1px 2px rgb(18 12 20 / 0.12), 0 6px 12px -6px rgb(18 12 20 / 0.35)",
+        "purpose": "Place and date tickets on event prints."
+      },
+      {
+        "name": "pin",
+        "value": "0 3px 5px rgb(18 12 20 / 0.35)",
+        "purpose": "The purple invitation pin."
+      },
+      {
+        "name": "button-lift",
+        "value": "0 8px 18px -10px rgb(18 12 20 / 0.6)",
+        "purpose": "Button hover on fine pointers only."
+      },
+      {
+        "name": "focus-halo",
+        "value": "0 0 0 3px rgb(103 59 152 / 0.35)",
+        "purpose": "Form field focus, with a purple border."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "All state transitions."
+      },
+      {
+        "name": "ease-settle",
+        "value": "cubic-bezier(0.2, 0.9, 0.25, 1.05)",
+        "purpose": "The one-time settle of prints and the invitation onto the board."
+      },
+      {
+        "name": "dur-fast",
+        "value": "140ms",
+        "purpose": "Button press scale (0.97)."
+      },
+      {
+        "name": "dur",
+        "value": "220ms",
+        "purpose": "Hover, underline and color transitions."
+      },
+      {
+        "name": "join-bar",
+        "value": "320ms",
+        "purpose": "Phone join bar slide-in."
+      },
+      {
+        "name": "settle",
+        "value": "420ms prints / 440ms invitation, 50ms stagger, 60ms lead-in",
+        "purpose": "First-load settle; drop 14-16px and rotate 4deg into tilt. Static under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "desktop",
+        "value": "1000px"
+      },
+      {
+        "name": "event-row",
+        "value": "900px"
+      },
+      {
+        "name": "footer-grid",
+        "value": "800px"
+      },
+      {
+        "name": "print-grid",
+        "value": "760px"
+      },
+      {
+        "name": "steps-row",
+        "value": "700px"
+      },
+      {
+        "name": "field-pair",
+        "value": "640px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The purple pill for every primary action; Join a meetup.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Join a meetup</a>",
+      "css": ".ds-btn { display:inline-flex; align-items:center; justify-content:center; gap:0.6em; min-height:52px; padding:0.85em 1.6em; border:2px solid var(--purple, #673b98); border-radius:999px; background:var(--purple, #673b98); color:#fff; font-family:'Satoshi', ui-sans-serif, system-ui, sans-serif; font-weight:700; font-size:1.1rem; line-height:1.1; letter-spacing:0.01em; text-decoration:none; transition:background-color 220ms cubic-bezier(0.23,1,0.32,1), transform 140ms cubic-bezier(0.23,1,0.32,1), box-shadow 220ms cubic-bezier(0.23,1,0.32,1); } .ds-btn:hover { background:var(--purple-deep, #4f2b78); border-color:var(--purple-deep, #4f2b78); box-shadow:0 8px 18px -10px rgb(18 12 20 / 0.6); } .ds-btn:active { transform:scale(0.97); } .ds-btn:focus-visible { outline:3px solid var(--purple, #673b98); outline-offset:3px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Outlined purple pill; fills on hover.",
+      "html": "<a class=\"ds-btn-ghost\" href=\"#\">See the details</a>",
+      "css": ".ds-btn-ghost { display:inline-flex; align-items:center; min-height:52px; padding:0.85em 1.6em; border:2px solid #673b98; border-radius:999px; background:transparent; color:#673b98; font-family:'Satoshi', ui-sans-serif, sans-serif; font-weight:700; font-size:1.1rem; line-height:1.1; text-decoration:none; transition:background-color 220ms cubic-bezier(0.23,1,0.32,1), color 220ms; } .ds-btn-ghost:hover { background:#673b98; color:#fff; } .ds-btn-ghost:active { transform:scale(0.97); } .ds-btn-ghost:focus-visible { outline:3px solid #673b98; outline-offset:3px; }"
+    },
+    {
+      "name": "Light Button on Night",
+      "kind": "button",
+      "refersTo": "button-light",
+      "description": "White pill with purple text for the footer and other night surfaces.",
+      "html": "<div class=\"ds-night\"><a class=\"ds-btn-light\" href=\"#\">Join a meetup</a></div>",
+      "css": ".ds-night { background:#120c14; padding:24px; } .ds-btn-light { display:inline-flex; align-items:center; min-height:52px; padding:0.85em 1.6em; border:2px solid #fff; border-radius:999px; background:#fff; color:#673b98; font-family:'Satoshi', ui-sans-serif, sans-serif; font-weight:700; font-size:1.1rem; line-height:1.1; text-decoration:none; transition:color 220ms cubic-bezier(0.23,1,0.32,1); } .ds-btn-light:hover { color:#4f2b78; } .ds-btn-light:focus-visible { outline:3px solid #ffdcbc; outline-offset:3px; }"
+    },
+    {
+      "name": "Arrow Link",
+      "kind": "custom",
+      "refersTo": "link-arrow",
+      "description": "Secondary next step: bold ink text, brand-pink underline, drawn arrow.",
+      "html": "<a class=\"ds-link-arrow\" href=\"#\">Read their story <svg aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"1em\" height=\"1em\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></a>",
+      "css": ".ds-link-arrow { display:inline-flex; align-items:center; gap:0.4em; font-family:'Satoshi', ui-sans-serif, sans-serif; font-weight:700; font-size:1.1rem; color:#1d1320; text-decoration:underline; text-decoration-color:#ebbad9; text-decoration-thickness:2px; text-underline-offset:0.22em; transition:text-decoration-color 220ms cubic-bezier(0.23,1,0.32,1); } .ds-link-arrow svg { width:1em; height:1em; transition:transform 220ms cubic-bezier(0.23,1,0.32,1); } .ds-link-arrow:hover { text-decoration-color:#673b98; } .ds-link-arrow:hover svg { transform:translateX(2px); } .ds-link-arrow:focus-visible { outline:3px solid #673b98; outline-offset:3px; border-radius:4px; }"
+    },
+    {
+      "name": "Welcome Chips",
+      "kind": "chip",
+      "refersTo": "chip-welcome",
+      "description": "Static statements of who belongs, on the board.",
+      "html": "<ul class=\"ds-chips\"><li>Ovarian</li><li>Uterine</li><li>Cervical</li><li>Vulvar</li><li>Caregivers</li></ul>",
+      "css": ".ds-chips { list-style:none; padding:16px; margin:0; display:flex; flex-wrap:wrap; gap:0.5rem; background:#f6ddee; } .ds-chips li { background:#fff; border:1.5px solid #ebbad9; border-radius:999px; padding:0.35rem 0.85rem; font-family:'Satoshi', ui-sans-serif, sans-serif; font-size:0.95rem; font-weight:600; color:#1d1320; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Join form field: label above, 54px white field, purple focus halo.",
+      "html": "<label class=\"ds-field\"><span>Your first name</span><input type=\"text\" placeholder=\"First name\" /></label>",
+      "css": ".ds-field { display:block; font-family:'Satoshi', ui-sans-serif, sans-serif; color:#1d1320; } .ds-field span { display:block; font-weight:700; line-height:1.35; margin-bottom:0.5rem; } .ds-field input { width:100%; min-height:54px; padding:0.75rem 1rem; font:inherit; font-size:max(16px, 1.05rem); background:#fff; border:1.5px solid #4a3b4e; border-radius:10px; transition:border-color 220ms cubic-bezier(0.23,1,0.32,1), box-shadow 220ms cubic-bezier(0.23,1,0.32,1); } .ds-field input::placeholder { color:#6e5f71; } .ds-field input:focus-visible { outline:none; border-color:#673b98; box-shadow:0 0 0 3px rgb(103 59 152 / 0.35); }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "site-header",
+      "description": "Night bar: uppercase links with growing peach underline, OCRA text link, purple join pill.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" aria-current=\"page\">Our Story</a><a href=\"#\">Monthly Meetup</a><a href=\"#\">Events</a><a class=\"ds-donate\" href=\"#\">Donate via OCRA <svg aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"1em\" height=\"1em\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7 17L17 7M9 7h8v8\"/></svg></a><a class=\"ds-join\" href=\"#\">Join a meetup</a></nav>",
+      "css": ".ds-nav { display:flex; align-items:center; gap:2rem; min-height:84px; padding:0 32px; background:#120c14; color:#fff; font-family:'Satoshi', ui-sans-serif, sans-serif; } .ds-nav a { color:inherit; font-weight:700; font-size:0.875rem; letter-spacing:0.09em; text-transform:uppercase; text-decoration:none; padding-block:0.5rem; background:linear-gradient(#ffdcbc,#ffdcbc) left bottom / 0 2px no-repeat; transition:background-size 220ms cubic-bezier(0.23,1,0.32,1), color 220ms; } .ds-nav a:hover { background-size:100% 2px; } .ds-nav a[aria-current='page'] { color:#ffdcbc; background-size:100% 2px; } .ds-nav a:focus-visible { outline:3px solid #ffdcbc; outline-offset:3px; border-radius:4px; } .ds-nav .ds-donate { display:inline-flex; align-items:center; gap:0.3em; text-transform:none; letter-spacing:0; font-weight:500; font-size:0.95rem; color:#eadcef; } .ds-nav .ds-donate svg { width:1em; height:1em; } .ds-nav .ds-join { margin-left:auto; min-height:46px; display:inline-flex; align-items:center; padding:0.7em 1.4em; border-radius:999px; background:#673b98; color:#fff; letter-spacing:0.08em; } .ds-nav .ds-join:hover { background:#4f2b78; }"
+    },
+    {
+      "name": "Taped Print",
+      "kind": "card",
+      "refersTo": "print",
+      "description": "A real photo pinned to the board: white border, tape strip, tilt, optional truthful ticket.",
+      "html": "<div class=\"ds-board\"><figure class=\"ds-print\"><span class=\"ds-tape\"></span><div class=\"ds-photo\" role=\"img\" aria-label=\"Photo\"></div><figcaption class=\"ds-ticket\">Orlando · Oct 2025</figcaption></figure></div>",
+      "css": ".ds-board { background:#f6ddee; padding:40px; } .ds-print { position:relative; margin:0; width:240px; background:#fff; padding:12px 12px 15px; box-shadow:0 1px 2px rgb(18 12 20 / 0.12), 0 16px 32px -14px rgb(18 12 20 / 0.38); transform:rotate(-2deg); } .ds-photo { aspect-ratio:4/3; background:linear-gradient(160deg,#c9a7b8,#7d6a86); } .ds-tape { position:absolute; top:-12px; left:50%; z-index:1; width:90px; height:26px; transform:translateX(-50%) rotate(-4deg); background:rgb(13 167 167 / 0.45); mix-blend-mode:multiply; } .ds-ticket { position:absolute; right:-10px; bottom:-14px; background:#fff; color:#1d1320; font-family:'Satoshi', ui-sans-serif, sans-serif; font-size:0.78rem; font-weight:700; padding:0.3rem 0.6rem; transform:rotate(3deg); box-shadow:0 1px 2px rgb(18 12 20 / 0.12), 0 6px 12px -6px rgb(18 12 20 / 0.35); }"
+    },
+    {
+      "name": "Meetup Invitation",
+      "kind": "card",
+      "refersTo": "invite-card",
+      "description": "The pinned peach invitation holding the next meetup and the primary action.",
+      "html": "<div class=\"ds-board2\"><section class=\"ds-invite\"><span class=\"ds-pin\"></span><h2>Meet us on Zoom, <em>once a month</em></h2><p>Free. Keep your camera off and just listen if you like.</p><a class=\"ds-invite-btn\" href=\"#\">Join a meetup</a><a class=\"ds-more\" href=\"#\">What to expect</a></section></div>",
+      "css": ".ds-board2 { background:#f6ddee; padding:40px; } .ds-invite { position:relative; max-width:22rem; background:#ffdcbc; padding:1.6rem; transform:rotate(-1.2deg); box-shadow:0 2px 4px rgb(18 12 20 / 0.08), 0 22px 40px -18px rgb(18 12 20 / 0.42); color:#1d1320; font-family:'Satoshi', ui-sans-serif, sans-serif; } .ds-pin { position:absolute; top:-9px; left:1.75rem; width:18px; height:18px; border-radius:50%; background:#673b98; box-shadow:0 3px 5px rgb(18 12 20 / 0.35); } .ds-invite h2 { margin:0; font-family:'Instrument Serif', 'Times New Roman', serif; font-weight:400; font-size:2.3rem; line-height:1.02; letter-spacing:-0.015em; } .ds-invite h2 em { font-style:italic; color:#673b98; } .ds-invite p { margin:0.75rem 0 0; font-size:1rem; line-height:1.5; } .ds-invite-btn { margin-top:1.25rem; display:flex; justify-content:center; align-items:center; min-height:52px; border-radius:999px; background:#673b98; color:#fff; font-weight:700; text-decoration:none; transition:background-color 220ms cubic-bezier(0.23,1,0.32,1); } .ds-invite-btn:hover { background:#4f2b78; } .ds-invite-btn:focus-visible, .ds-more:focus-visible { outline:3px solid #673b98; outline-offset:3px; } .ds-more { display:block; margin-top:0.85rem; text-align:center; font-weight:700; color:#1d1320; min-height:44px; line-height:44px; } .ds-more:hover { color:#4f2b78; text-decoration-color:#673b98; }"
+    },
+    {
+      "name": "Join Steps",
+      "kind": "custom",
+      "refersTo": "join-steps",
+      "description": "Numbered 1-2-3 sequence with purple serif numerals.",
+      "html": "<ol class=\"ds-steps\"><li><span class=\"n\">1</span><span>Tell us a little about you</span></li><li><span class=\"n\">2</span><span>A sister emails you a hello and the Zoom link</span></li><li><span class=\"n\">3</span><span>Come as you are, camera on or off</span></li></ol>",
+      "css": ".ds-steps { list-style:none; padding:0; margin:0; display:grid; grid-auto-flow:column; gap:1rem 2.25rem; font-family:'Satoshi', ui-sans-serif, sans-serif; color:#1d1320; } .ds-steps li { display:flex; align-items:baseline; gap:0.6rem; font-size:1rem; line-height:1.4; max-width:17rem; } .ds-steps .n { font-family:'Instrument Serif', 'Times New Roman', serif; font-size:2.75rem; line-height:0.8; color:#673b98; min-width:1.4ch; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Community Corkboard",
+    "overview": "The site is a pinboard kept by the sisters themselves. Pages open on pink ribbon-pattern paper (the board), and real photographs are pinned to it as white-bordered prints at slight angles, held by translucent strips of teal or pink tape. The next meetup is always pinned on top as a peach invitation card with a purple pin. Everything that is not the board is quiet: white paper sections, warm plum-black text, and a near-black header and footer that frame the board the way a wall frames a corkboard.\n\nType does the emotional work. Instrument Serif headlines run large and tight, and on page titles and signature lines a single italic phrase turns purple (\"this *alone.*\", \"*We'll save you a seat.*\"). Satoshi carries everything readable at a generous 17 to 19px with 1.6 leading, because visitors may be tired, in treatment, or reading through vision changes. Purple is the voice of action: every primary button, the pin, the focus ring, the step numerals.\n\nDensity is relaxed and one-idea-per-section. Sections alternate grounds (board, white, peach, plain pink) so whole bands of brand color own the page, and each section closes on one obvious next step. Motion is a single authored moment: prints settle onto the board once on first load, and nothing else performs.",
+    "keyCharacteristics": [
+      "Pink ribbon-pattern board ground (`ground-board`) behind page openings and gatherings.",
+      "Real photos only, framed as white-bordered taped prints at -3 to 3 degrees of tilt.",
+      "Peach invitation card with a purple pin as the recurring home of the primary action.",
+      "Instrument Serif display with one purple italic phrase on titles; Satoshi body.",
+      "Purple pill buttons; near-black header, footer and phone join bar.",
+      "Soft neutral paper shadows; no borders on photos, no gradients, no glass.",
+      "One settle animation (420ms, 50ms stagger), static under reduced motion."
+    ],
+    "rules": [
+      {
+        "name": "The Purple Means Go Rule",
+        "body": "Purple marks what you can do (buttons, checked choices, focus) plus the small set of brand accents (the italic title phrase, the pin, the step numerals). It never fills a section or colors body copy.",
+        "section": "colors"
+      },
+      {
+        "name": "The Teal Never Speaks Rule",
+        "body": "`teal` is ribbon, tape and dots. Text that wants teal uses `teal-ink`; nothing white ever sits on `teal`.",
+        "section": "colors"
+      },
+      {
+        "name": "The Peach On Dark Rule",
+        "body": "On night surfaces, peach replaces purple as the accent: current-page marks, hover underlines and the focus ring.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Italic Phrase Rule",
+        "body": "A title may carry one italic phrase in purple, at the end, as its emotional turn (\"More than a *diagnosis*\"). It is reserved for page titles, the closing signature line and the invitation card; section H2s stay roman.",
+        "section": "typography"
+      },
+      {
+        "name": "The Generous Floor Rule",
+        "body": "Body never drops below 17px, form inputs never below 16px, and tap targets never below 44px.",
+        "section": "typography"
+      },
+      {
+        "name": "The Pinned Things Lift Rule",
+        "body": "Only objects pinned to the board (prints, invitation, tickets, the pin) carry shadow at rest. Everything else is flat until hovered.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** pin real photos as prints: white border, tape, a tilt between -3 and 3 degrees, the print shadow.",
+      "**Do** keep the next meetup visible as the peach invitation card with the purple pin, and close every section with one next step.",
+      "**Do** use `teal-ink` for any teal text and keep `teal` for ribbons, tape and dots.",
+      "**Do** give one italic purple phrase to page titles and signature lines only.",
+      "**Do** switch accents to peach on night surfaces, including the focus ring.",
+      "**Do** keep body at 17px or more, inputs at 16px or more, targets at 44px or more, and honor reduced motion.",
+      "**Do** let whole sections take pink, peach or the board as their ground instead of drawing dividers."
+    ],
+    "donts": [
+      "**Don't** put white or small text on `teal`.",
+      "**Don't** round prints, tape, tickets or the invitation card; pinned paper is square.",
+      "**Don't** add motion beyond the one settle moment and plain state transitions (140 to 320ms, ease-out).",
+      "**Don't** use purple as a section fill or for body copy.",
+      "**Don't** italicize more than one phrase in a title, or add italic accents to ordinary section headings.",
+      "**Don't** use stock or stand-in photography; prints are real moments only."
+    ]
+  }
+}
