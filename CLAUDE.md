@@ -59,7 +59,7 @@ Installed in `.claude/skills/`. When guidance conflicts, follow this order:
 
 - [ ] Upcoming events. Every event on the current site has passed (as of Nov 2026).
 - [ ] Email address that receives Get Involved submissions.
-- [ ] **Owner review of the drafted Privacy and Terms pages** (`src/pages/privacy.astro`, `terms.astro`). They're written in plain language but aren't legal advice.
+- [ ] **Owner review of the drafted Privacy and Terms pages** (`src/pages/privacy-policy.astro`, `terms-of-use.astro`). They're written in plain language but aren't legal advice.
 - [ ] Resend account, a verified sending domain, and the Vercel env vars above.
 - [x] Alt text written for every content image.
 - [x] News video kept at full 1280×720 (`public/media/ovarian-cancer-awareness.mp4`).
