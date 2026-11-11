@@ -16,6 +16,17 @@ Rebuilding **toteallysisters.org**, currently on WordPress + Elementor, as a new
 - **Get Involved is the contact page.** Its 11-field intake form (listed in PRODUCT.md) is the site's main conversion. Submissions are **emailed to a team member**, with no Google Sheet or CRM. The old empty Contact Us page is dropped.
 - **OCRA:** Toteally Sisters is independent and partners with OCRA. All Donate and Register links go to OCRA's Ovarian Fitness Orlando pages. Never imply Toteally Sisters takes donations itself or is part of OCRA.
 
+### Decided after the Impeccable critique (Nov 2026; current site scored 16/36)
+
+The full critique is in `.impeccable/critique/`.
+
+- **The monthly Zoom meetup is the centerpiece.** Sister Support becomes a "Monthly Meetup / What to expect" page: when, how long, cameras optional, caregivers welcome, and answers to first-timer questions. Home and every "Join" button lead there. Say outright that **all gynecologic cancers are welcome**, not only ovarian.
+- **Navigation:** "Join a meetup" (Get Involved) is the main button everywhere, including the phone menu, and opens in the same tab. **Donate becomes a smaller text link labeled "Donate via OCRA ↗"** and must never appear twice.
+- **Intake form:** keep all 11 fields, made gentler. No pre-selected answers, add "Prefer not to say", autocomplete attributes, a visible focus ring, plain-language inline errors, a privacy and "what happens next" note above the button, and a warm confirmation after sending.
+- **Scope: fix everything** the critique found while rebuilding, keeping the same look. Copy changes outside Our Story go to the owner for approval.
+- **Events:** past events go into an automatic "Past events" section. Show a friendly empty state when nothing is scheduled. Home features the next upcoming event, falling back to the meetup.
+- **Accessibility baseline:** one H1 per page, real alt text, labeled icon controls, a focus outline visible on dark and light backgrounds, and no white text on `#0DA7A7`.
+
 ## Design skills: priority when they conflict
 
 Installed in `.claude/skills/`. When guidance conflicts, follow this order:
@@ -42,6 +53,7 @@ Installed in `.claude/skills/`. When guidance conflicts, follow this order:
 ## Open items before launch
 
 - [ ] Upcoming events. Every event on the current site has passed (as of Nov 2026).
+- [ ] Monthly meetup details: usual day, time, length, platform link policy, and who hosts.
 - [ ] Email address that receives Get Involved submissions.
 - [ ] Privacy Policy and Terms of Use text. Both are empty on the current site, and the form collects health information.
 - [ ] Alt text for the images. Most have none, so write it.
