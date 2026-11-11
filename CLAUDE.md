@@ -54,6 +54,10 @@ Installed in `.claude/skills/`. When guidance conflicts, follow this order:
 - **Events** are Markdown files in `src/content/events/` (title, start/end, the card's date label exactly as written, summary, image path, link, `hidden`).
 - **Get Involved form** posts to `src/pages/api/join.ts`, which emails the team via **Resend**. Vercel environment variables: `RESEND_API_KEY` (secret), `JOIN_TO_EMAIL`, `JOIN_FROM_EMAIL` (a sender on a domain verified in Resend). Without them, the form shows a "didn't send" message pointing to Instagram.
 - The news video is the original at full 1280×720, re-encoded for streaming (`public/media/`).
+- **Security and cache headers** (CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy, plus caching for `/images`, `/fonts` and `/media`) are added to `.vercel/output/config.json` by `integrations/vercel-headers.mjs`, because `vercel.json` isn't applied with this adapter. Any new third-party script, font, embed or API must be allowed in its CSP. It also sends `X-Robots-Tag: noindex` on `toteally-sisters.vercel.app`.
+- **SEO:** each page passes `description` (and optionally `image`) to `Base.astro`, which renders the title, description, canonical, Open Graph and Twitter tags. Utility pages pass `noindex`. `src/pages/sitemap.xml.ts` lists the indexable pages (add new pages there), and `public/robots.txt` points to it.
+- **Cookies:** none. Vercel Web Analytics is cookie-free, so no consent banner is needed. Adding anything that sets cookies or tracks visitors (reCAPTCHA, Meta Pixel, Google Analytics, YouTube embeds) would require a consent banner and CSP changes.
+- **Pending design decision:** the Sister Support teal section (white on `#0DA7A7`, 2.95:1, and the teal "EMPOWER" label) fails WCAG AA contrast. It's the original brand styling, left unchanged until the owner approves a darker teal.
 
 ## Open items before launch
 

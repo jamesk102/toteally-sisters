@@ -5,10 +5,19 @@ import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
 import Analytics from '@vercel/analytics/astro';
 
-interface Props { title: string; description?: string }
-const { title, description = site.description } = Astro.props;
+interface Props {
+  title: string;
+  description?: string;
+  /** Social preview image in public/images/ (defaults to the home hero photo) */
+  image?: { src: string; alt: string; width: number; height: number };
+  /** Keep utility pages (thank-you, error, 404) out of search results */
+  noindex?: boolean;
+}
+const defaultImage = { src: '/images/imageHero.jpg', alt: 'Toteally Sisters in matching teal shirts at a cycling fundraiser.', width: 2072, height: 1438 };
+const { title, description = site.description, image = defaultImage, noindex = false } = Astro.props;
 const fullTitle = title === site.name ? `${site.name} – A group of women who are gynecological cancer survivors and fighters.` : `${title} – ${site.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const imageUrl = new URL(image.src, Astro.site);
 ---
 <!doctype html>
 <html lang="en">
@@ -17,12 +26,22 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL('/images/imageHero.jpg', Astro.site)} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content={String(image.width)} />
+    <meta property="og:image:height" content={String(image.height)} />
+    <meta property="og:image:alt" content={image.alt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content={image.alt} />
     <meta name="theme-color" content="#000000" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preload" href="/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin />
@@ -45,6 +64,15 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
         els.forEach((el) => io.observe(el));
       } else els.forEach((el) => el.classList.add('is-in'));
+
+      // Load the large ribbon background shortly before its section scrolls into view.
+      const bgs = document.querySelectorAll('.ribbons');
+      if ('IntersectionObserver' in window) {
+        const bgo = new IntersectionObserver((entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('bg-in'); bgo.unobserve(e.target); } });
+        }, { rootMargin: '600px 0px' });
+        bgs.forEach((el) => bgo.observe(el));
+      } else bgs.forEach((el) => el.classList.add('bg-in'));
     </script>
     <style>main:focus { outline: none; }</style>
   </body>

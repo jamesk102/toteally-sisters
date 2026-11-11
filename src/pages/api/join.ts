@@ -27,6 +27,14 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   const html = !ct.includes('application/json');
   const reply = (body: { ok: boolean; [k: string]: unknown }, status = 200) =>
     html ? redirect(body.ok ? '/get-involved/thanks/' : '/get-involved/sorry/', 303) : json(body, status);
+  // Only accept submissions sent from this website's own pages (blocks cross-site form posts).
+  // Browsers send these headers on every POST; requests without them are left to the checks below.
+  const site = request.headers.get('sec-fetch-site');
+  const origin = request.headers.get('origin');
+  const host = request.headers.get('host');
+  if ((site && site !== 'same-origin' && site !== 'none') || (origin && host && new URL(origin).host !== host)) {
+    return reply({ ok: false, error: 'forbidden' }, 403);
+  }
   try {
     input = ct.includes('application/json') ? await request.json() : Object.fromEntries(await request.formData());
   } catch {
@@ -56,18 +64,25 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     .join('');
   const text = (Object.keys(labels) as (keyof JoinFields)[]).map((k) => `${labels[k]}: ${data[k] || '—'}`).join('\n');
 
-  const res = await fetch('https://api.resend.com/emails', {
+  const oneLine = (v: string) => v.replace(/[\r\n\t]+/g, ' ').trim();
+  let res: Response;
+  try {
+  res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { authorization: `Bearer ${key}`, 'content-type': 'application/json' },
     body: JSON.stringify({
       from,
       to: recipients,
       reply_to: data.email,
-      subject: `${test ? '[TEST] ' : ''}New sister: ${data.firstName} ${data.lastName}`,
+      subject: oneLine(`${test ? '[TEST] ' : ''}New sister: ${data.firstName} ${data.lastName}`),
       html: `<p style="font-family:sans-serif">Someone just filled out the Join form. Reply to this email to write back to them.</p><table>${rows}</table>`,
       text,
     }),
   });
+  } catch (err) {
+    console.error('Resend unreachable', err);
+    return reply({ ok: false, error: 'send_failed' }, 502);
+  }
 
   if (!res.ok) {
     const detail = await res.text().catch(() => '');

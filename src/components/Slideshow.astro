@@ -1,7 +1,8 @@
 ---
 /**
  * Crossfading background slideshow, like the original's Elementor slideshows.
- * Full-resolution original photos. Only the first loads eagerly; the rest lazy-load.
+ * Full-resolution original photos. Only the first photo is in the page at load; each following photo
+ * is fetched just before it is shown, once the slideshow is on screen, so hidden slides don't slow the page.
  * Under reduced motion it shows the first photo only.
  */
 interface Slide { src: string; alt: string; position?: string }
@@ -11,11 +12,12 @@ const { slides, interval = 5000, eager = false, class: cls = '' } = Astro.props;
 <div class:list={['slideshow', cls]} data-slideshow data-interval={interval}>
   {slides.map((s, i) => (
     <img
-      src={s.src}
+      src={i === 0 ? s.src : undefined}
+      data-src={i === 0 ? undefined : s.src}
       alt={s.alt}
       class:list={{ active: i === 0 }}
       style={s.position ? `object-position:${s.position}` : undefined}
-      loading={i === 0 && eager ? 'eager' : 'lazy'}
+      loading={i === 0 && eager ? 'eager' : i === 0 ? 'lazy' : undefined}
       fetchpriority={i === 0 && eager ? 'high' : undefined}
       decoding="async"
       aria-hidden={i === 0 ? undefined : 'true'}
@@ -30,18 +32,26 @@ const { slides, interval = 5000, eager = false, class: cls = '' } = Astro.props;
     let i = 0;
     const ms = Number(box.dataset.interval) || 5000;
     let timer: number | undefined;
+    const load = (img: HTMLImageElement) => { if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; } };
     const next = () => {
+      const n = (i + 1) % imgs.length;
+      if (!imgs[n].complete || !imgs[n].naturalWidth) { load(imgs[n]); return; } // wait for the photo before fading to it
       imgs[i].classList.remove('active'); imgs[i].setAttribute('aria-hidden', 'true');
-      i = (i + 1) % imgs.length;
-      imgs[i].loading = 'eager';
+      i = n;
       imgs[i].classList.add('active'); imgs[i].removeAttribute('aria-hidden');
-      imgs[(i + 1) % imgs.length].loading = 'eager'; // warm the next one
+      load(imgs[(i + 1) % imgs.length]); // fetch the one after, ready for the next change
     };
-    const start = () => { if (!timer) timer = window.setInterval(next, ms); };
+    // Fetch the next photo only after the page has finished loading, so it never competes with the first one.
+    const warm = () => load(imgs[(i + 1) % imgs.length]);
+    const start = () => {
+      if (document.readyState === 'complete') warm(); else addEventListener('load', warm, { once: true });
+      if (!timer) timer = window.setInterval(next, ms);
+    };
     const stop = () => { window.clearInterval(timer); timer = undefined; };
-    // Only run while visible and the tab is open.
-    new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop())).observe(box);
-    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+    // Only run while on screen and the tab is open.
+    let onScreen = false;
+    new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; onScreen ? start() : stop(); }).observe(box);
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : onScreen && start()));
   });
 </script>
 

@@ -1,12 +1,16 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import vercel from '@astrojs/vercel';
+import vercelHeaders from './integrations/vercel-headers.mjs';
 
 export default defineConfig({
   site: 'https://toteallysisters.org',
   adapter: vercel(),
   trailingSlash: 'always', // like the original WordPress site: /our-story/
   devToolbar: { enabled: false },
+  // Inline the small CSS files so they don't block the first paint.
+  build: { inlineStylesheets: 'always' },
+  integrations: [vercelHeaders({ vercelHost: 'toteally-sisters.vercel.app' })],
   // The site keeps the original WordPress addresses. These forward the redesign's
   // short-lived addresses (and the old empty Contact Us page) to the originals.
   redirects: {

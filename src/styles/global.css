@@ -94,6 +94,8 @@ strong { font-weight: 700; }
 
 /* Ribbon pattern background, as on the original */
 .ribbons { background-image: url('/images/tealRibbons.png'); background-size: cover; background-position: center; }
+/* The pattern is a large file: with JavaScript it loads as the section approaches the screen (see Base.astro). */
+.js .ribbons:not(.bg-in) { background-image: none; }
 
 /* Image frames used throughout the original */
 .frame { border: 8px solid var(--pink); border-radius: 100px; object-fit: cover; }
