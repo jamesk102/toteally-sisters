@@ -47,7 +47,8 @@ export default function vercelHeaders({ productionHost = 'toteallysisters.org', 
         // Send visitors of the production *.vercel.app address to the same page on the real domain.
         // (Per-deployment preview URLs use other hostnames and are unaffected.)
         const redirect = vercelHost ? [{ src: '/(.*)', has: [{ type: 'host', value: vercelHost }], headers: { Location: `https://${productionHost}/$1` }, status: 308 }] : [];
-        config.routes = [...redirect, ...routes, ...(config.routes ?? [])];
+        // Security headers first (they `continue`), so even the redirect response carries them.
+        config.routes = [routes[0], ...redirect, ...routes.slice(1), ...(config.routes ?? [])];
         await writeFile(file, JSON.stringify(config, null, 2));
         logger.info(`Added security and cache headers (production host ${productionHost}).`);
       },

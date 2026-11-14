@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { validate, labels, type JoinFields } from '../../lib/join-form';
+import { rateLimit } from '../../lib/rate-limit';
 
 export const prerender = false;
 
@@ -20,7 +21,12 @@ const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
 
-export const POST: APIRoute = async ({ request, redirect }) => {
+const MAX_BODY_BYTES = 16 * 1024; // the real form is a few KB at most
+// Strip line breaks and other control characters from anything that goes into an email header.
+const oneLine = (v: string) => v.replace(/[\u0000-\u001f\u007f\u2028\u2029]+/g, ' ').trim();
+
+export const POST: APIRoute = async (context) => {
+  const { request, redirect } = context;
   let input: Record<string, unknown>;
   const ct = request.headers.get('content-type') ?? '';
   // A plain form post (no JavaScript) gets a page back instead of JSON.
@@ -32,14 +38,34 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   const site = request.headers.get('sec-fetch-site');
   const origin = request.headers.get('origin');
   const host = request.headers.get('host');
-  if ((site && site !== 'same-origin' && site !== 'none') || (origin && host && new URL(origin).host !== host)) {
+  let originHost: string | null = null;
+  try { originHost = origin ? new URL(origin).host : null; } catch { originHost = 'invalid'; } // e.g. "Origin: null"
+  if ((site && site !== 'same-origin' && site !== 'none') || (origin && host && originHost !== host)) {
     return reply({ ok: false, error: 'forbidden' }, 403);
   }
+
+  // Rate limit: 5 submissions per 10 minutes per visitor (best effort, per server instance).
+  // Vercel sets these from the real connection; if no address is available at all, skip limiting
+  // rather than putting every visitor in one shared bucket.
+  let ip = '';
+  try { ip = context.clientAddress || ''; } catch {} // Astro throws if the adapter has no address
+  ip ||= request.headers.get('x-real-ip') || request.headers.get('x-vercel-forwarded-for') || '';
+  const limited = ip ? rateLimit(`join:${ip}`, 5, 10 * 60 * 1000) : { ok: true as const, retryAfter: 0 };
+  if (!limited.ok) {
+    if (html) return redirect('/get-involved/sorry/', 303);
+    return new Response(JSON.stringify({ ok: false, error: 'rate_limited' }), {
+      status: 429,
+      headers: { 'content-type': 'application/json', 'cache-control': 'no-store', 'retry-after': String(limited.retryAfter) },
+    });
+  }
+
+  if (Number(request.headers.get('content-length') ?? 0) > MAX_BODY_BYTES) return reply({ ok: false, error: 'too_large' }, 413);
   try {
     input = ct.includes('application/json') ? await request.json() : Object.fromEntries(await request.formData());
   } catch {
     return reply({ ok: false, error: 'bad_request' }, 400);
   }
+  if (!input || typeof input !== 'object' || Array.isArray(input)) return reply({ ok: false, error: 'bad_request' }, 400);
 
   // Spam checks: a hidden field people never see, and a minimum time on the page.
   const started = Number(input.started);
@@ -64,7 +90,6 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     .join('');
   const text = (Object.keys(labels) as (keyof JoinFields)[]).map((k) => `${labels[k]}: ${data[k] || '—'}`).join('\n');
 
-  const oneLine = (v: string) => v.replace(/[\r\n\t]+/g, ' ').trim();
   let res: Response;
   try {
   res = await fetch('https://api.resend.com/emails', {
@@ -87,9 +112,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   if (!res.ok) {
     const detail = await res.text().catch(() => '');
     console.error('Resend send failed', res.status, detail.slice(0, 500));
-    // Only test submissions get Resend's error back, to help with setup.
-    return reply({ ok: false, error: 'send_failed', ...(test ? { status: res.status, detail: detail.slice(0, 500) } : {}) }, 502);
+    return reply({ ok: false, error: 'send_failed' }, 502); // details stay in the server log only
   }
-  const sent = await res.json().catch(() => ({}));
-  return reply({ ok: true, ...(test ? { test: true, id: sent.id, sentTo: recipients, from } : {}) });
+  return reply({ ok: true, ...(test ? { test: true } : {}) });
 };

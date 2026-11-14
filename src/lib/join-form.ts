@@ -44,7 +44,8 @@ export function validate(input: Partial<Record<string, unknown>>) {
   if (!data.firstName) errors.firstName = 'Please tell us your first name.';
   if (!data.lastName) errors.lastName = 'Please tell us your last name.';
   if (!data.email) errors.email = 'We need an email to send you the meetup link.';
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) errors.email = 'That email doesn’t look quite right. Check for a typo?';
+  // Plain address only: no spaces, commas, angle brackets or quotes, since it becomes the email's Reply-To.
+  else if (!/^[A-Za-z0-9._%+'-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/.test(data.email)) errors.email = 'That email doesn’t look quite right. Check for a typo?';
   if (data.iAm && !iAmOptions.includes(data.iAm)) data.iAm = '';
   if (data.heard && !heardOptions.includes(data.heard)) data.heard = '';
   if (data.meetup && !meetupOptions.includes(data.meetup)) data.meetup = '';
